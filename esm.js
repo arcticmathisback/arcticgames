@@ -3023,7 +3023,7 @@ function generateAllSections() {
           const encoded = encodeURIComponent(normalized);
 
           fetch(
-            `https://esm.sh/gh/bubbls/ugs-singlefile/UGS-Files/${encoded}?t=${Date.now()}`,
+            `https://esm.sh/gh/arcticmathisback/arcticgames/UGS-Files/${encoded}?t=${Date.now()}`,
           )
             .then((response) => response.text())
             .then((text) => {
