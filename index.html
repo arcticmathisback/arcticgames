@@ -128,11 +128,17 @@
         /* Header */
         .app-header {
             display: flex;
-            flex-direction: column;
+            flex-wrap: wrap;
             align-items: center;
+            justify-content: space-between;
             margin-bottom: 30px;
+            gap: 12px;
         }
-        .app-header h1 {
+        .app-header .header-left {
+            display: flex;
+            flex-direction: column;
+        }
+        .app-header .header-left h1 {
             font-size: 3rem;
             font-weight: 800;
             background: linear-gradient(135deg, #ffffff 0%, #a0d8f0 100%);
@@ -144,28 +150,311 @@
             align-items: center;
             gap: 12px;
         }
-        .app-header h1 i {
+        .app-header .header-left h1 i {
             -webkit-text-fill-color: initial;
             color: #7fc8e8;
             font-size: 2.2rem;
         }
-        .app-header .subtitle {
+        .app-header .header-left .subtitle {
             color: rgba(255, 255, 255, 0.7);
             font-size: 1rem;
             margin-top: -8px;
             letter-spacing: 1px;
         }
-        .app-header .subtitle a {
+        .app-header .header-left .subtitle a {
             color: #8bcbff;
             text-decoration: none;
             border-bottom: 1px dashed rgba(255, 255, 255, 0.3);
             transition: border-color 0.2s;
         }
-        .app-header .subtitle a:hover {
+        .app-header .header-left .subtitle a:hover {
             border-color: #8bcbff;
         }
 
-        /* Search & tools */
+        /* ---------- SETTINGS BUTTON (top right) ---------- */
+        .settings-btn-wrap {
+            position: relative;
+            flex-shrink: 0;
+        }
+        .settings-btn {
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            width: 52px;
+            height: 52px;
+            border-radius: 50%;
+            color: #cceeff;
+            font-size: 1.4rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(6px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+        }
+        .settings-btn:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: rotate(60deg) scale(1.08);
+            border-color: rgba(255, 255, 255, 0.4);
+            box-shadow: 0 0 30px rgba(100, 200, 255, 0.25);
+            color: #fff;
+        }
+        .settings-btn .badge-dot {
+            position: absolute;
+            top: 6px;
+            right: 6px;
+            width: 10px;
+            height: 10px;
+            background: #4fc3f7;
+            border-radius: 50%;
+            border: 2px solid #0b1a2e;
+            animation: pulse-dot 2s ease-in-out infinite;
+        }
+        @keyframes pulse-dot {
+            0%,
+            100% {
+                opacity: 0.6;
+                transform: scale(0.9);
+            }
+            50% {
+                opacity: 1;
+                transform: scale(1.2);
+            }
+        }
+
+        /* ---------- SETTINGS MODAL ---------- */
+        .settings-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.6);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            z-index: 2000;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            animation: fadeIn 0.3s ease;
+        }
+        .settings-overlay.active {
+            display: flex;
+        }
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: scale(0.96);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        .settings-modal {
+            background: rgba(10, 25, 47, 0.92);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-radius: 28px;
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            max-width: 560px;
+            width: 100%;
+            max-height: 90vh;
+            overflow-y: auto;
+            padding: 32px 34px;
+            box-shadow: 0 30px 80px rgba(0, 0, 0, 0.6);
+            position: relative;
+        }
+        .settings-modal::-webkit-scrollbar {
+            width: 4px;
+        }
+        .settings-modal::-webkit-scrollbar-track {
+            background: rgba(255, 255, 255, 0.05);
+        }
+        .settings-modal::-webkit-scrollbar-thumb {
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 4px;
+        }
+
+        .settings-modal .modal-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 28px;
+            padding-bottom: 16px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+        }
+        .settings-modal .modal-header h2 {
+            font-size: 1.6rem;
+            font-weight: 700;
+            color: #e8f4ff;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        .settings-modal .modal-header h2 i {
+            color: #7fc8e8;
+            font-size: 1.4rem;
+        }
+        .settings-modal .modal-close {
+            background: rgba(255, 255, 255, 0.06);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            color: rgba(255, 255, 255, 0.6);
+            font-size: 1.3rem;
+            cursor: pointer;
+            transition: all 0.25s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .settings-modal .modal-close:hover {
+            background: rgba(255, 255, 255, 0.15);
+            color: #fff;
+            transform: rotate(90deg);
+        }
+
+        .settings-modal .settings-section {
+            margin-bottom: 26px;
+        }
+        .settings-modal .settings-section:last-child {
+            margin-bottom: 0;
+        }
+        .settings-modal .settings-section h3 {
+            font-size: 1rem;
+            font-weight: 600;
+            color: rgba(255, 255, 255, 0.5);
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            margin-bottom: 14px;
+        }
+
+        /* Stats grid */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+        }
+        .stat-card {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 14px;
+            padding: 16px 18px;
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            text-align: center;
+        }
+        .stat-card .stat-number {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: #7fc8e8;
+            line-height: 1.2;
+        }
+        .stat-card .stat-label {
+            font-size: 0.75rem;
+            color: rgba(255, 255, 255, 0.4);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-top: 4px;
+        }
+
+        /* Action buttons */
+        .settings-actions {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        .settings-action-btn {
+            background: rgba(255, 255, 255, 0.06);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 14px 20px;
+            border-radius: 14px;
+            color: #e8f4ff;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.25s ease;
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            text-align: left;
+            backdrop-filter: blur(4px);
+        }
+        .settings-action-btn i {
+            font-size: 1.2rem;
+            width: 28px;
+            text-align: center;
+            color: #7fc8e8;
+        }
+        .settings-action-btn:hover {
+            background: rgba(255, 255, 255, 0.12);
+            border-color: rgba(255, 255, 255, 0.25);
+            transform: translateX(4px);
+        }
+        .settings-action-btn:active {
+            transform: scale(0.98);
+        }
+        .settings-action-btn.export-btn {
+            border-left: 4px solid #4fc3f7;
+        }
+        .settings-action-btn.import-btn {
+            border-left: 4px solid #81c784;
+        }
+        .settings-action-btn.clear-btn {
+            border-left: 4px solid #ef5350;
+            color: rgba(255, 255, 255, 0.6);
+        }
+        .settings-action-btn.clear-btn:hover {
+            background: rgba(239, 83, 80, 0.15);
+            border-color: rgba(239, 83, 80, 0.3);
+            color: #fff;
+        }
+
+        .settings-action-btn .btn-desc {
+            font-weight: 400;
+            font-size: 0.8rem;
+            color: rgba(255, 255, 255, 0.35);
+            margin-left: auto;
+        }
+
+        /* Toast notification */
+        .toast {
+            position: fixed;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%) translateY(80px);
+            background: rgba(10, 25, 47, 0.92);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            padding: 14px 28px;
+            border-radius: 16px;
+            color: #fff;
+            font-weight: 500;
+            z-index: 3000;
+            opacity: 0;
+            transition: all 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            pointer-events: none;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.4);
+            font-size: 0.95rem;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        .toast.show {
+            opacity: 1;
+            transform: translateX(-50%) translateY(0);
+            pointer-events: auto;
+        }
+        .toast.success i {
+            color: #81c784;
+        }
+        .toast.error i {
+            color: #ef5350;
+        }
+        .toast.info i {
+            color: #4fc3f7;
+        }
+
+        /* ---------- SEARCH & TOOLS ---------- */
         .search-tools {
             display: flex;
             flex-wrap: wrap;
@@ -258,7 +547,7 @@
             border: 1px solid rgba(255, 255, 255, 0.06);
         }
 
-        /* ---------- GAME BUTTONS (MORE DESIGNED) ---------- */
+        /* ---------- GAME BUTTONS ---------- */
         .buttons-container {
             display: flex;
             flex-direction: column;
@@ -266,7 +555,6 @@
             align-items: center;
         }
 
-        /* Target the input buttons generated by the script */
         #sections-container .buttons-container input[type="button"] {
             background: linear-gradient(145deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.02));
             border: 1px solid rgba(255, 255, 255, 0.12);
@@ -287,7 +575,6 @@
             position: relative;
             overflow: hidden;
         }
-        /* Subtle shimmer overlay */
         #sections-container .buttons-container input[type="button"]::before {
             content: '';
             position: absolute;
@@ -309,7 +596,6 @@
             transform: scale(0.98) translateX(0);
         }
 
-        /* Fallback for any custom game buttons (if added manually) */
         .game-btn {
             background: linear-gradient(145deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.02));
             border: 1px solid rgba(255, 255, 255, 0.12);
@@ -403,11 +689,26 @@
                 margin-left: 70px;
                 padding: 20px 15px 40px;
             }
-            .app-header h1 {
+            .app-header .header-left h1 {
                 font-size: 2.2rem;
             }
-            .app-header h1 i {
+            .app-header .header-left h1 i {
                 font-size: 1.6rem;
+            }
+            .settings-btn {
+                width: 44px;
+                height: 44px;
+                font-size: 1.2rem;
+            }
+            .settings-modal {
+                padding: 24px 20px;
+            }
+            .stats-grid {
+                grid-template-columns: 1fr 1fr;
+                gap: 8px;
+            }
+            .stat-card .stat-number {
+                font-size: 1.4rem;
             }
             .search-tools input[type="text"] {
                 min-width: 150px;
@@ -435,11 +736,37 @@
                 margin-left: 56px;
                 padding: 15px 10px 30px;
             }
-            .app-header h1 {
+            .app-header .header-left h1 {
                 font-size: 1.7rem;
             }
-            .app-header .subtitle {
+            .app-header .header-left .subtitle {
                 font-size: 0.8rem;
+            }
+            .settings-btn {
+                width: 38px;
+                height: 38px;
+                font-size: 1rem;
+            }
+            .settings-modal {
+                padding: 18px 14px;
+                border-radius: 20px;
+            }
+            .settings-modal .modal-header h2 {
+                font-size: 1.3rem;
+            }
+            .stats-grid {
+                grid-template-columns: 1fr 1fr;
+                gap: 6px;
+            }
+            .stat-card {
+                padding: 12px 10px;
+            }
+            .stat-card .stat-number {
+                font-size: 1.2rem;
+            }
+            .settings-action-btn {
+                padding: 12px 16px;
+                font-size: 0.9rem;
             }
             .search-tools {
                 flex-direction: column;
@@ -461,6 +788,11 @@
                 font-size: 0.9rem;
                 border-left-width: 4px;
             }
+            .toast {
+                max-width: 90%;
+                font-size: 0.85rem;
+                padding: 12px 18px;
+            }
         }
     </style>
 </head>
@@ -474,14 +806,21 @@
     <!-- ====== MAIN CONTENT ====== -->
     <div class="main-content">
         <div class="app-header">
-            <h1><i class="fas fa-snowflake"></i> Arctic 1.0 Games</h1>
-            <div class="subtitle">
-                Made By Arctic 1.0
-                <a href="https://guns.lol/mrtakeyadown999" target="_blank">
-                    About Me
-                </a>
-                &nbsp;·&nbsp; Discord:
-                <a href="https://discord.gg/bKDKnYaayg" target="_blank">Join</a>
+            <div class="header-left">
+                <h1><i class="fas fa-snowflake"></i> Arctic 1.0 Games</h1>
+                <div class="subtitle">
+                    Made By Arctic 1.0
+                    <a href="https://guns.lol/mrtakeyadown999" target="_blank">About Me</a>
+                    &nbsp;·&nbsp; Discord:
+                    <a href="https://discord.gg/bKDKnYaayg" target="_blank">Join</a>
+                </div>
+            </div>
+            <!-- Settings Button (top right) -->
+            <div class="settings-btn-wrap">
+                <button class="settings-btn" id="settingsToggle" aria-label="Settings">
+                    <i class="fas fa-cog"></i>
+                    <span class="badge-dot"></span>
+                </button>
             </div>
         </div>
 
@@ -500,13 +839,457 @@
         </div>
     </div>
 
+    <!-- ====== SETTINGS MODAL ====== -->
+    <div class="settings-overlay" id="settingsOverlay">
+        <div class="settings-modal" role="dialog" aria-modal="true" aria-label="Settings">
+            <div class="modal-header">
+                <h2><i class="fas fa-cog"></i> Settings</h2>
+                <button class="modal-close" id="settingsClose" aria-label="Close settings">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+
+            <!-- Progress Stats -->
+            <div class="settings-section">
+                <h3><i class="fas fa-chart-simple" style="margin-right:8px;color:#7fc8e8;"></i>Your Progress</h3>
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-number" id="statGamesPlayed">0</div>
+                        <div class="stat-label">Games Played</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number" id="statTotalPlays">0</div>
+                        <div class="stat-label">Total Plays</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number" id="statFavorites">0</div>
+                        <div class="stat-label">Favorites</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number" id="statLastPlayed">—</div>
+                        <div class="stat-label">Last Played</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Export / Import -->
+            <div class="settings-section">
+                <h3><i class="fas fa-file-export" style="margin-right:8px;color:#7fc8e8;"></i>Save &amp; Load Progress</h3>
+                <div class="settings-actions">
+                    <button class="settings-action-btn export-btn" id="exportJsonBtn">
+                        <i class="fas fa-download"></i>
+                        <span>Download JSON <span style="font-weight:400;font-size:0.8rem;color:rgba(255,255,255,0.35);">(save all progress)</span></span>
+                        <span class="btn-desc">.json</span>
+                    </button>
+                    <button class="settings-action-btn import-btn" id="importJsonBtn">
+                        <i class="fas fa-upload"></i>
+                        <span>Upload JSON <span style="font-weight:400;font-size:0.8rem;color:rgba(255,255,255,0.35);">(restore progress)</span></span>
+                        <span class="btn-desc">.json</span>
+                    </button>
+                    <input type="file" id="importFileInput" accept=".json" style="display:none" />
+                    <button class="settings-action-btn clear-btn" id="clearDataBtn">
+                        <i class="fas fa-trash-alt"></i>
+                        <span>Clear All Progress</span>
+                        <span class="btn-desc">irreversible</span>
+                    </button>
+                </div>
+            </div>
+
+            <div style="margin-top:20px;padding-top:16px;border-top:1px solid rgba(255,255,255,0.05);font-size:0.75rem;color:rgba(255,255,255,0.25);text-align:center;">
+                Progress is stored locally in your browser.
+            </div>
+        </div>
+    </div>
+
+    <!-- ====== TOAST ====== -->
+    <div class="toast" id="toast">
+        <i class="fas fa-check-circle"></i>
+        <span id="toastMessage">Done!</span>
+    </div>
+
     <!-- ====== SCRIPTS LOADED FROM YOUR FORK ====== -->
     <script src="https://cdn.jsdelivr.net/gh/arcticmathisback/arcticgames@main/games.js"></script>
     <script src="https://cdn.jsdelivr.net/gh/arcticmathisback/arcticgames@main/searchbut.js"></script>
 
     <script>
         (function() {
-            // ----- Build sidebar letters -----
+            'use strict';
+
+            // ============================================================
+            //  1.  GAME PROGRESS TRACKING  (localStorage + JSON export)
+            // ============================================================
+
+            const STORAGE_KEY = 'arctic_games_progress';
+
+            function getDefaultProgress() {
+                return {
+                    version: '1.0',
+                    games: {}, // key: gameName -> { playCount, firstPlayed, lastPlayed, favorite }
+                    totalPlays: 0,
+                    totalGames: 0,
+                    favorites: [],
+                    lastUpdated: null
+                };
+            }
+
+            function loadProgress() {
+                try {
+                    const raw = localStorage.getItem(STORAGE_KEY);
+                    if (raw) {
+                        const data = JSON.parse(raw);
+                        // ensure all fields exist
+                        if (!data.games) data.games = {};
+                        if (!data.favorites) data.favorites = [];
+                        if (typeof data.totalPlays !== 'number') data.totalPlays = 0;
+                        if (typeof data.totalGames !== 'number') data.totalGames = 0;
+                        return data;
+                    }
+                } catch (_) { /* ignore */ }
+                return getDefaultProgress();
+            }
+
+            function saveProgress(data) {
+                data.lastUpdated = new Date().toISOString();
+                localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
+                updateStatsUI(data);
+            }
+
+            // Track a game play
+            function trackGamePlay(gameName) {
+                if (!gameName || gameName.trim() === '') return;
+                const name = gameName.trim();
+                const data = loadProgress();
+
+                if (!data.games[name]) {
+                    data.games[name] = {
+                        playCount: 0,
+                        firstPlayed: new Date().toISOString(),
+                        lastPlayed: null,
+                        favorite: false
+                    };
+                    data.totalGames += 1;
+                }
+                data.games[name].playCount += 1;
+                data.games[name].lastPlayed = new Date().toISOString();
+                data.totalPlays += 1;
+
+                saveProgress(data);
+            }
+
+            // Toggle favorite status
+            function toggleFavorite(gameName) {
+                if (!gameName) return;
+                const data = loadProgress();
+                if (!data.games[gameName]) return;
+                data.games[gameName].favorite = !data.games[gameName].favorite;
+                const fav = data.games[gameName].favorite;
+                if (fav) {
+                    if (!data.favorites.includes(gameName)) data.favorites.push(gameName);
+                } else {
+                    data.favorites = data.favorites.filter(f => f !== gameName);
+                }
+                saveProgress(data);
+                return fav;
+            }
+
+            function getGameProgress(gameName) {
+                const data = loadProgress();
+                return data.games[gameName] || null;
+            }
+
+            // ============================================================
+            //  2.  UI STATS UPDATE
+            // ============================================================
+
+            function updateStatsUI(data) {
+                const d = data || loadProgress();
+                const games = Object.keys(d.games);
+                const totalGames = games.length;
+                const totalPlays = d.totalPlays || 0;
+                const favs = d.favorites || [];
+
+                document.getElementById('statGamesPlayed').textContent = totalGames;
+                document.getElementById('statTotalPlays').textContent = totalPlays;
+                document.getElementById('statFavorites').textContent = favs.length;
+
+                // Last played
+                let last = '—';
+                let lastTime = 0;
+                for (const g of games) {
+                    const ts = d.games[g].lastPlayed;
+                    if (ts) {
+                        const t = new Date(ts).getTime();
+                        if (t > lastTime) { lastTime = t;
+                            last = new Date(ts).toLocaleDateString(); }
+                    }
+                }
+                document.getElementById('statLastPlayed').textContent = last;
+            }
+
+            // ============================================================
+            //  3.  EXPORT / IMPORT JSON
+            // ============================================================
+
+            function exportJSON() {
+                const data = loadProgress();
+                const json = JSON.stringify(data, null, 2);
+                const blob = new Blob([json], { type: 'application/json' });
+                const url = URL.createObjectURL(blob);
+                const a = document.createElement('a');
+                a.href = url;
+                const dateStr = new Date().toISOString().slice(0, 10);
+                a.download = `arctic-progress-${dateStr}.json`;
+                document.body.appendChild(a);
+                a.click();
+                document.body.removeChild(a);
+                URL.revokeObjectURL(url);
+                showToast('Progress exported successfully!', 'success');
+            }
+
+            function importJSON(file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    try {
+                        const data = JSON.parse(e.target.result);
+                        // Basic validation
+                        if (!data.games || typeof data.games !== 'object') {
+                            throw new Error('Invalid progress file: missing "games" object.');
+                        }
+                        if (typeof data.totalPlays !== 'number') data.totalPlays = 0;
+                        if (typeof data.totalGames !== 'number') data.totalGames = 0;
+                        if (!data.favorites) data.favorites = [];
+                        // Ensure each game entry has required fields
+                        for (const key of Object.keys(data.games)) {
+                            const g = data.games[key];
+                            if (typeof g.playCount !== 'number') g.playCount = 0;
+                            if (!g.firstPlayed) g.firstPlayed = new Date().toISOString();
+                            if (!g.lastPlayed) g.lastPlayed = null;
+                            if (typeof g.favorite !== 'boolean') g.favorite = false;
+                        }
+                        // Rebuild favorites list from game data
+                        data.favorites = Object.keys(data.games).filter(k => data.games[k].favorite === true);
+
+                        saveProgress(data);
+                        showToast('Progress restored successfully!', 'success');
+                        // Refresh stats
+                        updateStatsUI(data);
+                    } catch (err) {
+                        showToast('Error: ' + err.message, 'error');
+                    }
+                };
+                reader.onerror = function() {
+                    showToast('Failed to read file.', 'error');
+                };
+                reader.readAsText(file);
+            }
+
+            // ============================================================
+            //  4.  CLEAR DATA
+            // ============================================================
+
+            function clearAllProgress() {
+                if (!confirm('Are you sure you want to delete ALL progress data? This cannot be undone.')) return;
+                const empty = getDefaultProgress();
+                saveProgress(empty);
+                updateStatsUI(empty);
+                showToast('All progress cleared.', 'info');
+            }
+
+            // ============================================================
+            //  5.  TOAST NOTIFICATION
+            // ============================================================
+
+            let toastTimer = null;
+
+            function showToast(message, type) {
+                const toast = document.getElementById('toast');
+                const msgEl = document.getElementById('toastMessage');
+                const icon = toast.querySelector('i');
+                toast.className = 'toast';
+                if (type === 'success') {
+                    toast.classList.add('success');
+                    icon.className = 'fas fa-check-circle';
+                } else if (type === 'error') {
+                    toast.classList.add('error');
+                    icon.className = 'fas fa-exclamation-circle';
+                } else {
+                    toast.classList.add('info');
+                    icon.className = 'fas fa-info-circle';
+                }
+                msgEl.textContent = message;
+                toast.classList.add('show');
+                clearTimeout(toastTimer);
+                toastTimer = setTimeout(() => {
+                    toast.classList.remove('show');
+                }, 3500);
+            }
+
+            // ============================================================
+            //  6.  SETTINGS MODAL TOGGLE
+            // ============================================================
+
+            const overlay = document.getElementById('settingsOverlay');
+            const toggleBtn = document.getElementById('settingsToggle');
+            const closeBtn = document.getElementById('settingsClose');
+
+            function openSettings() {
+                updateStatsUI();
+                overlay.classList.add('active');
+                document.body.style.overflow = 'hidden';
+            }
+
+            function closeSettings() {
+                overlay.classList.remove('active');
+                document.body.style.overflow = '';
+            }
+
+            toggleBtn.addEventListener('click', openSettings);
+            closeBtn.addEventListener('click', closeSettings);
+            overlay.addEventListener('click', function(e) {
+                if (e.target === overlay) closeSettings();
+            });
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'Escape' && overlay.classList.contains('active')) closeSettings();
+            });
+
+            // ============================================================
+            //  7.  SETTINGS BUTTON HANDLERS
+            // ============================================================
+
+            document.getElementById('exportJsonBtn').addEventListener('click', exportJSON);
+            document.getElementById('importJsonBtn').addEventListener('click', function() {
+                document.getElementById('importFileInput').click();
+            });
+            document.getElementById('importFileInput').addEventListener('change', function(e) {
+                if (this.files && this.files.length > 0) {
+                    importJSON(this.files[0]);
+                }
+                this.value = '';
+            });
+            document.getElementById('clearDataBtn').addEventListener('click', clearAllProgress);
+
+            // ============================================================
+            //  8.  TRACK GAME CLICKS  (event delegation)
+            // ============================================================
+
+            function getGameNameFromButton(btn) {
+                // Try value attribute first, then textContent, then data-name
+                if (btn.value && btn.value.trim() !== '') return btn.value.trim();
+                // If it's a game-btn with .game-name inside
+                const nameSpan = btn.querySelector('.game-name');
+                if (nameSpan) return nameSpan.textContent.trim();
+                // Fallback: clean up textContent (remove icons, etc.)
+                let txt = btn.textContent.replace(/[★☆]\s*/, '').trim();
+                // If there's an icon, the text might have extra spaces
+                return txt || 'Unknown Game';
+            }
+
+            document.addEventListener('click', function(e) {
+                // Find the game button (could be input[type="button"] or .game-btn)
+                let btn = e.target.closest('.buttons-container input[type="button"]');
+                if (!btn) btn = e.target.closest('.game-btn');
+                if (!btn) return;
+
+                // Ignore if it's a favorite toggle or other inner action
+                if (e.target.closest('.favorite-toggle')) return;
+
+                const gameName = getGameNameFromButton(btn);
+                if (gameName && gameName !== 'Unknown Game') {
+                    trackGamePlay(gameName);
+                }
+            });
+
+            // Also handle dynamically loaded game buttons via mutation observer
+            // (The event delegation above already catches them, but we need to
+            //  make sure the tracking runs after they're added.)
+
+            // ============================================================
+            //  9.  FAVORITE TOGGLE  (add tiny star to game buttons)
+            // ============================================================
+
+            // We'll inject a small star icon into each game button to toggle favorite.
+            // This runs after games are loaded. We'll use a mutation observer.
+
+            function injectFavoriteToggles() {
+                const allGameBtns = document.querySelectorAll(
+                    '#sections-container .buttons-container input[type="button"], .game-btn'
+                );
+                allGameBtns.forEach(btn => {
+                    // Avoid duplicate injection
+                    if (btn.querySelector('.favorite-toggle')) return;
+                    const name = getGameNameFromButton(btn);
+                    const prog = getGameProgress(name);
+                    const isFav = prog ? prog.favorite : false;
+
+                    const star = document.createElement('span');
+                    star.className = 'favorite-toggle';
+                    star.style.cssText = `
+                        margin-left: auto;
+                        cursor: pointer;
+                        font-size: 1.2rem;
+                        color: ${isFav ? '#ffd54f' : 'rgba(255,255,255,0.2)'};
+                        transition: all 0.25s ease;
+                        flex-shrink: 0;
+                        padding: 0 4px;
+                        user-select: none;
+                    `;
+                    star.innerHTML = isFav ? '★' : '☆';
+                    star.title = isFav ? 'Remove from favorites' : 'Add to favorites';
+
+                    star.addEventListener('click', function(e) {
+                        e.stopPropagation();
+                        const gName = getGameNameFromButton(btn);
+                        const newFav = toggleFavorite(gName);
+                        star.innerHTML = newFav ? '★' : '☆';
+                        star.style.color = newFav ? '#ffd54f' : 'rgba(255,255,255,0.2)';
+                        star.title = newFav ? 'Remove from favorites' : 'Add to favorites';
+                        updateStatsUI();
+                        showToast(newFav ? `Added "${gName}" to favorites` : `Removed "${gName}" from favorites`,
+                            'info');
+                    });
+
+                    // Insert after the game name, before any existing elements
+                    const nameSpan = btn.querySelector('.game-name');
+                    if (nameSpan) {
+                        nameSpan.after(star);
+                    } else {
+                        // Fallback: append at the end
+                        btn.appendChild(star);
+                    }
+                });
+            }
+
+            // Observe sections-container for new game buttons
+            const sectionsContainer = document.getElementById('sections-container');
+            if (sectionsContainer) {
+                const observer = new MutationObserver(function() {
+                    injectFavoriteToggles();
+                    // Also update sidebar states
+                    updateSidebarStates();
+                    // Update stats
+                    updateStatsUI();
+                });
+                observer.observe(sectionsContainer, { childList: true, subtree: true });
+            }
+
+            // Initial injection after a delay (games might load later)
+            setTimeout(() => {
+                injectFavoriteToggles();
+                updateStatsUI();
+            }, 800);
+
+            // Also run after load button is clicked (game.js loads)
+            document.getElementById('lolbutton').addEventListener('click', function() {
+                setTimeout(() => {
+                    injectFavoriteToggles();
+                    updateStatsUI();
+                }, 600);
+            });
+
+            // ============================================================
+            //  10. SIDEBAR BUILD & UPDATE
+            // ============================================================
+
             function buildSidebar() {
                 const sidebar = document.getElementById('sidebar');
                 if (!sidebar) return;
@@ -525,7 +1308,6 @@
                     });
                     sidebar.appendChild(btn);
                 }
-                // Top button
                 const topBtn = document.createElement('button');
                 topBtn.className = 'sidebar-btn';
                 topBtn.innerHTML = '<i class="fas fa-arrow-up"></i>';
@@ -536,22 +1318,6 @@
                 sidebar.appendChild(topBtn);
             }
 
-            // ----- Load button now pulls game.js from YOUR fork -----
-            document.getElementById('lolbutton').addEventListener('click', function() {
-                const script = document.createElement('script');
-                script.src = 'https://cdn.jsdelivr.net/gh/arcticmathisback/arcticgames@main/game.js';
-                document.body.appendChild(script);
-                console.log('Load script triggered from your fork.');
-            });
-
-            // ----- Build sidebar after DOM ready -----
-            if (document.readyState === 'loading') {
-                document.addEventListener('DOMContentLoaded', buildSidebar);
-            } else {
-                buildSidebar();
-            }
-
-            // ----- Update sidebar button states (empty / populated) -----
             function updateSidebarStates() {
                 const buttons = document.querySelectorAll('.sidebar-btn');
                 buttons.forEach(btn => {
@@ -567,12 +1333,17 @@
                 });
             }
 
-            // Observe sections container for changes
-            const container = document.getElementById('sections-container');
-            if (container) {
-                const observer = new MutationObserver(function() {
+            if (document.readyState === 'loading') {
+                document.addEventListener('DOMContentLoaded', buildSidebar);
+            } else {
+                buildSidebar();
+            }
+
+            // Observer for sidebar states
+            if (sectionsContainer) {
+                const sidebarObserver = new MutationObserver(function() {
                     updateSidebarStates();
-                    // Also update letter section counts
+                    // Update letter counts
                     document.querySelectorAll('.letter-section').forEach(section => {
                         const header = section.querySelector('.letter-header');
                         if (header) {
@@ -584,28 +1355,60 @@
                         }
                     });
                 });
-                observer.observe(container, { childList: true, subtree: true });
+                sidebarObserver.observe(sectionsContainer, { childList: true, subtree: true });
             }
 
-            // Initial update after a short delay
             setTimeout(updateSidebarStates, 600);
-        })();
-    </script>
 
-    <!-- ====== GAME LOADING FETCH – NOW POINTED TO YOUR FORK ====== -->
-    <script>
-        // This overrides the original game-loading logic (if any) with your fork.
-        // If your games.js or searchbut.js already contain a fetch, you may need to replace it there.
-        // But we'll add a global interceptor to ensure any fetch for game files goes to your fork.
-        (function() {
-            const originalFetch = window.fetch;
-            window.fetch = function(url, options) {
-                // If the URL contains the old bubbls/ugs-singlefile/UGS-Files pattern, rewrite it.
-                if (typeof url === 'string' && url.includes('bubbls/ugs-singlefile/UGS-Files')) {
-                    url = url.replace('bubbls/ugs-singlefile', 'arcticmathisback/arcticgames');
+            // ============================================================
+            //  11. OVERRIDE FETCH for game files (point to your fork)
+            // ============================================================
+
+            (function() {
+                const originalFetch = window.fetch;
+                window.fetch = function(url, options) {
+                    if (typeof url === 'string' && url.includes('bubbls/ugs-singlefile/UGS-Files')) {
+                        url = url.replace('bubbls/ugs-singlefile', 'arcticmathisback/arcticgames');
+                    }
+                    return originalFetch.call(this, url, options);
+                };
+            })();
+
+            // ============================================================
+            //  12. RE-INJECT FAVORITES AFTER SEARCH FILTER
+            // ============================================================
+
+            // The searchbut.js might hide/show buttons, so we need to re-run
+            // injection periodically or on search changes.
+            // We'll use a simple interval for robustness, but only run when needed.
+
+            let injectionInterval = setInterval(() => {
+                const container = document.getElementById('sections-container');
+                if (container && container.children.length > 0) {
+                    injectFavoriteToggles();
                 }
-                return originalFetch.call(this, url, options);
-            };
+            }, 2000);
+
+            // Stop the interval after 10 seconds (enough time for initial loads)
+            setTimeout(() => {
+                clearInterval(injectionInterval);
+            }, 10000);
+
+            // Also re-inject when search input changes (debounced)
+            const searchInput = document.getElementById('searchInput');
+            if (searchInput) {
+                let debounceTimer;
+                searchInput.addEventListener('input', function() {
+                    clearTimeout(debounceTimer);
+                    debounceTimer = setTimeout(() => {
+                        injectFavoriteToggles();
+                    }, 400);
+                });
+            }
+
+            console.log('🏔️ Arctic 1.0 Games — Progress tracking enabled!');
+            console.log('💾 Your progress is saved in localStorage. Use Settings → Download JSON to backup.');
+
         })();
     </script>
 </body>
