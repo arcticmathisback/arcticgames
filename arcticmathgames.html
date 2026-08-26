@@ -1,0 +1,2418 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <title>Arctic 1.0 Games</title>
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+    <style>
+        /* ---------- CSS CUSTOM PROPERTIES (THEMING) ---------- */
+        :root {
+            /* Arctic Frost (default) */
+            --bg-gradient: linear-gradient(145deg, #0b1a2e 0%, #1c3e5a 40%, #4a8ea8 100%);
+            --sidebar-bg: rgba(10, 25, 47, 0.75);
+            --sidebar-border: rgba(255, 255, 255, 0.1);
+            --text-primary: #fff;
+            --text-secondary: rgba(255, 255, 255, 0.7);
+            --text-muted: rgba(255, 255, 255, 0.4);
+            --text-inverse: #0b1a2e;
+            --accent: #7fc8e8;
+            --accent-dark: #4a9fc5;
+            --accent-glow: rgba(100, 200, 255, 0.2);
+            --card-bg: rgba(255, 255, 255, 0.08);
+            --card-border: rgba(255, 255, 255, 0.12);
+            --card-hover: rgba(255, 255, 255, 0.15);
+            --modal-bg: rgba(10, 25, 47, 0.92);
+            --modal-border: rgba(255, 255, 255, 0.12);
+            --input-bg: rgba(255, 255, 255, 0.08);
+            --input-border: rgba(255, 255, 255, 0.15);
+            --input-focus: rgba(255, 255, 255, 0.4);
+            --btn-bg: rgba(255, 255, 255, 0.08);
+            --btn-hover: rgba(255, 255, 255, 0.2);
+            --btn-border: rgba(255, 255, 255, 0.2);
+            --letter-color: #cceeff;
+            --letter-border: rgba(255, 255, 255, 0.12);
+            --game-btn-border-left: #4a9fc5;
+            --game-btn-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            --game-btn-hover-shadow: 0 8px 30px rgba(0, 160, 255, 0.3);
+            --toast-bg: rgba(10, 25, 47, 0.92);
+            --stat-bg: rgba(255, 255, 255, 0.05);
+            --stat-border: rgba(255, 255, 255, 0.06);
+            --empty-opacity: 0.3;
+            --footer-color: rgba(255, 255, 255, 0.2);
+            --settings-icon-color: #cceeff;
+            --badge-dot-bg: #4fc3f7;
+            --snowflake-opacity: 0.05;
+            --sidebar-btn-color: #d4e9ff;
+            --sidebar-btn-hover: #fff;
+            --sidebar-btn-shadow: rgba(100, 200, 255, 0.2);
+            --game-btn-text: #f0faff;
+            --game-btn-shadow-hover: rgba(0, 160, 255, 0.3);
+            --toast-border: rgba(255, 255, 255, 0.12);
+            --toast-text: #fff;
+            --stat-number: #7fc8e8;
+            --stat-label: rgba(255, 255, 255, 0.4);
+            --settings-action-bg: rgba(255, 255, 255, 0.06);
+            --settings-action-border: rgba(255, 255, 255, 0.1);
+            --settings-action-hover: rgba(255, 255, 255, 0.12);
+            --settings-action-color: #e8f4ff;
+            --modal-header-border: rgba(255, 255, 255, 0.08);
+            --modal-header-color: #e8f4ff;
+            --close-btn-bg: rgba(255, 255, 255, 0.06);
+            --close-btn-hover: rgba(255, 255, 255, 0.15);
+            --close-btn-color: rgba(255, 255, 255, 0.6);
+            --close-btn-hover-color: #fff;
+            --section-title: #cceeff;
+            --count-bg: rgba(255, 255, 255, 0.06);
+            --count-border: rgba(255, 255, 255, 0.06);
+            --count-color: rgba(255, 255, 255, 0.4);
+            --star-color: rgba(255, 255, 255, 0.2);
+            --star-active: #ffd54f;
+            --search-placeholder: rgba(255, 255, 255, 0.5);
+            --subtitle-color: rgba(255, 255, 255, 0.7);
+            --subtitle-link: #8bcbff;
+            --empty-message-color: rgba(255, 255, 255, 0.4);
+            --empty-message-bg: rgba(255, 255, 255, 0.03);
+            --empty-message-border: rgba(255, 255, 255, 0.08);
+        }
+
+        /* ---------- STRAWBERRY BLAST THEME ---------- */
+        body.theme-strawberry {
+            --bg-gradient: linear-gradient(145deg, #fce4ec 0%, #f8bbd0 40%, #f48fb1 100%);
+            --sidebar-bg: rgba(60, 20, 40, 0.85);
+            --sidebar-border: rgba(255, 255, 255, 0.15);
+            --text-primary: #1a1a1a;
+            --text-secondary: rgba(0, 0, 0, 0.65);
+            --text-muted: rgba(0, 0, 0, 0.35);
+            --text-inverse: #fff;
+            --accent: #d81b60;
+            --accent-dark: #c2185b;
+            --accent-glow: rgba(216, 27, 96, 0.15);
+            --card-bg: rgba(255, 255, 255, 0.5);
+            --card-border: rgba(255, 255, 255, 0.6);
+            --card-hover: rgba(255, 255, 255, 0.7);
+            --modal-bg: rgba(255, 245, 248, 0.95);
+            --modal-border: rgba(216, 27, 96, 0.15);
+            --input-bg: rgba(255, 255, 255, 0.7);
+            --input-border: rgba(216, 27, 96, 0.2);
+            --input-focus: rgba(216, 27, 96, 0.4);
+            --btn-bg: rgba(255, 255, 255, 0.5);
+            --btn-hover: rgba(255, 255, 255, 0.8);
+            --btn-border: rgba(216, 27, 96, 0.2);
+            --letter-color: #4a1a2e;
+            --letter-border: rgba(216, 27, 96, 0.15);
+            --game-btn-border-left: #d81b60;
+            --game-btn-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+            --game-btn-hover-shadow: 0 8px 30px rgba(216, 27, 96, 0.2);
+            --toast-bg: rgba(255, 245, 248, 0.95);
+            --stat-bg: rgba(255, 255, 255, 0.6);
+            --stat-border: rgba(216, 27, 96, 0.08);
+            --empty-opacity: 0.5;
+            --footer-color: rgba(0, 0, 0, 0.2);
+            --settings-icon-color: #4a1a2e;
+            --badge-dot-bg: #d81b60;
+            --snowflake-opacity: 0.03;
+            --sidebar-btn-color: #fce4ec;
+            --sidebar-btn-hover: #fff;
+            --sidebar-btn-shadow: rgba(216, 27, 96, 0.2);
+            --game-btn-text: #1a1a1a;
+            --game-btn-shadow-hover: rgba(216, 27, 96, 0.2);
+            --toast-border: rgba(216, 27, 96, 0.15);
+            --toast-text: #1a1a1a;
+            --stat-number: #d81b60;
+            --stat-label: rgba(0, 0, 0, 0.45);
+            --settings-action-bg: rgba(255, 255, 255, 0.5);
+            --settings-action-border: rgba(216, 27, 96, 0.12);
+            --settings-action-hover: rgba(255, 255, 255, 0.8);
+            --settings-action-color: #1a1a1a;
+            --modal-header-border: rgba(216, 27, 96, 0.1);
+            --modal-header-color: #1a1a1a;
+            --close-btn-bg: rgba(216, 27, 96, 0.08);
+            --close-btn-hover: rgba(216, 27, 96, 0.15);
+            --close-btn-color: rgba(0, 0, 0, 0.4);
+            --close-btn-hover-color: #1a1a1a;
+            --section-title: #4a1a2e;
+            --count-bg: rgba(216, 27, 96, 0.08);
+            --count-border: rgba(216, 27, 96, 0.1);
+            --count-color: rgba(0, 0, 0, 0.4);
+            --star-color: rgba(0, 0, 0, 0.15);
+            --star-active: #d81b60;
+            --search-placeholder: rgba(0, 0, 0, 0.35);
+            --subtitle-color: rgba(0, 0, 0, 0.65);
+            --subtitle-link: #c2185b;
+            --empty-message-color: rgba(0, 0, 0, 0.4);
+            --empty-message-bg: rgba(255, 255, 255, 0.3);
+            --empty-message-border: rgba(216, 27, 96, 0.1);
+        }
+
+        /* ---------- MIDNIGHT AURORA THEME ---------- */
+        body.theme-midnight {
+            --bg-gradient: linear-gradient(145deg, #070614 0%, #1a1035 45%, #0c3a42 100%);
+            --sidebar-bg: rgba(8, 6, 22, 0.82);
+            --sidebar-border: rgba(126, 232, 200, 0.12);
+            --text-primary: #f4f7ff;
+            --text-secondary: rgba(244, 247, 255, 0.7);
+            --text-muted: rgba(244, 247, 255, 0.4);
+            --text-inverse: #070614;
+            --accent: #7ee8c8;
+            --accent-dark: #4ec9a8;
+            --accent-glow: rgba(126, 232, 200, 0.22);
+            --card-bg: rgba(255, 255, 255, 0.07);
+            --card-border: rgba(126, 232, 200, 0.14);
+            --card-hover: rgba(255, 255, 255, 0.14);
+            --modal-bg: rgba(10, 8, 28, 0.94);
+            --modal-border: rgba(126, 232, 200, 0.16);
+            --input-bg: rgba(255, 255, 255, 0.08);
+            --input-border: rgba(126, 232, 200, 0.2);
+            --input-focus: rgba(126, 232, 200, 0.5);
+            --btn-bg: rgba(255, 255, 255, 0.08);
+            --btn-hover: rgba(255, 255, 255, 0.18);
+            --btn-border: rgba(126, 232, 200, 0.22);
+            --letter-color: #d8fff4;
+            --letter-border: rgba(126, 232, 200, 0.16);
+            --game-btn-border-left: #7ee8c8;
+            --game-btn-shadow: 0 4px 15px rgba(0, 0, 0, 0.28);
+            --game-btn-hover-shadow: 0 8px 30px rgba(126, 232, 200, 0.22);
+            --toast-bg: rgba(10, 8, 28, 0.94);
+            --stat-bg: rgba(255, 255, 255, 0.06);
+            --stat-border: rgba(126, 232, 200, 0.1);
+            --empty-opacity: 0.28;
+            --footer-color: rgba(255, 255, 255, 0.22);
+            --settings-icon-color: #d8fff4;
+            --badge-dot-bg: #7ee8c8;
+            --snowflake-opacity: 0.06;
+            --sidebar-btn-color: #d8fff4;
+            --sidebar-btn-hover: #fff;
+            --sidebar-btn-shadow: rgba(126, 232, 200, 0.22);
+            --game-btn-text: #f4f7ff;
+            --game-btn-shadow-hover: rgba(126, 232, 200, 0.22);
+            --toast-border: rgba(126, 232, 200, 0.16);
+            --toast-text: #fff;
+            --stat-number: #7ee8c8;
+            --stat-label: rgba(255, 255, 255, 0.42);
+            --settings-action-bg: rgba(255, 255, 255, 0.06);
+            --settings-action-border: rgba(126, 232, 200, 0.12);
+            --settings-action-hover: rgba(255, 255, 255, 0.12);
+            --settings-action-color: #eef8ff;
+            --modal-header-border: rgba(126, 232, 200, 0.12);
+            --modal-header-color: #eef8ff;
+            --close-btn-bg: rgba(255, 255, 255, 0.06);
+            --close-btn-hover: rgba(255, 255, 255, 0.15);
+            --close-btn-color: rgba(255, 255, 255, 0.6);
+            --close-btn-hover-color: #fff;
+            --section-title: #d8fff4;
+            --count-bg: rgba(126, 232, 200, 0.08);
+            --count-border: rgba(126, 232, 200, 0.12);
+            --count-color: rgba(255, 255, 255, 0.45);
+            --star-color: rgba(255, 255, 255, 0.22);
+            --star-active: #ffe082;
+            --search-placeholder: rgba(255, 255, 255, 0.5);
+            --subtitle-color: rgba(255, 255, 255, 0.7);
+            --subtitle-link: #7ee8c8;
+            --empty-message-color: rgba(255, 255, 255, 0.4);
+            --empty-message-bg: rgba(255, 255, 255, 0.04);
+            --empty-message-border: rgba(126, 232, 200, 0.12);
+        }
+
+        /* ---------- RESET & GLOBAL ---------- */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            --font-scale: 1;
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            min-height: 100vh;
+            background: var(--bg-gradient);
+            color: var(--text-primary);
+            display: flex;
+            padding: 0;
+            margin: 0;
+            position: relative;
+            overflow-x: hidden;
+            transition: background 0.5s ease, color 0.4s ease;
+        }
+        body.hide-pattern::before {
+            opacity: 0;
+        }
+        body.reduce-motion,
+        body.reduce-motion *,
+        body.reduce-motion *::before,
+        body.reduce-motion *::after {
+            animation: none !important;
+            transition: none !important;
+            scroll-behavior: auto !important;
+        }
+        body.hide-empty-letters .letter-section.empty {
+            display: none;
+        }
+        body.hide-empty-letters .sidebar-btn.empty {
+            display: none;
+        }
+        body.compact-mode .letter-section {
+            margin-bottom: 22px;
+            min-height: 0;
+        }
+        body.compact-mode .buttons-container {
+            gap: 8px;
+        }
+        body.compact-mode .game-btn,
+        body.compact-mode #sections-container .buttons-container input[type="button"] {
+            padding: 10px 16px;
+            font-size: calc(0.95rem * var(--font-scale));
+            border-radius: 10px;
+        }
+        body.compact-mode .letter-header {
+            font-size: 1.6rem;
+            margin-bottom: 10px;
+        }
+        /* Snowflake overlay */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100' opacity='0.05'%3E%3Cpath fill='%23ffffff' d='M50 0 L55 35 L90 10 L70 45 L100 50 L70 55 L90 90 L55 65 L50 100 L45 65 L10 90 L30 55 L0 50 L30 45 L10 10 L45 35 Z'/%3E%3C/svg%3E");
+            background-size: 120px 120px;
+            pointer-events: none;
+            z-index: 0;
+            opacity: var(--snowflake-opacity);
+            transition: opacity 0.6s ease;
+        }
+
+        /* ---------- SIDEBAR ---------- */
+        .sidebar {
+            position: fixed;
+            left: 0;
+            top: 0;
+            width: 80px;
+            height: 100vh;
+            background: var(--sidebar-bg);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            padding: 20px 8px;
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+            overflow-y: auto;
+            box-shadow: 4px 0 20px rgba(0, 0, 0, 0.4);
+            z-index: 1000;
+            border-right: 1px solid var(--sidebar-border);
+            transition: background 0.4s ease, border-color 0.4s ease;
+        }
+        .sidebar::-webkit-scrollbar {
+            width: 4px;
+        }
+        .sidebar::-webkit-scrollbar-track {
+            background: rgba(255, 255, 255, 0.05);
+        }
+        .sidebar::-webkit-scrollbar-thumb {
+            background: rgba(255, 255, 255, 0.25);
+            border-radius: 4px;
+        }
+
+        .sidebar-btn {
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            padding: 10px 0;
+            font-size: 16px;
+            font-weight: 700;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            color: var(--sidebar-btn-color);
+            text-align: center;
+            min-height: 44px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            backdrop-filter: blur(4px);
+            letter-spacing: 1px;
+            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+        }
+        .sidebar-btn:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: scale(1.05);
+            border-color: rgba(255, 255, 255, 0.4);
+            color: var(--sidebar-btn-hover);
+            box-shadow: 0 0 15px var(--sidebar-btn-shadow);
+        }
+        .sidebar-btn.empty {
+            opacity: var(--empty-opacity);
+            cursor: default;
+            pointer-events: none;
+        }
+        .sidebar-btn.empty:hover {
+            transform: none;
+            background: rgba(255, 255, 255, 0.08);
+        }
+        .sidebar-btn .badge {
+            font-size: 10px;
+            background: rgba(255, 255, 255, 0.15);
+            border-radius: 20px;
+            padding: 1px 6px;
+            margin-left: 2px;
+        }
+        .sidebar-btn .fa-arrow-up {
+            font-size: 1.2rem;
+        }
+
+        /* ---------- MAIN CONTENT ---------- */
+        .main-content {
+            margin-left: 100px;
+            flex: 1;
+            padding: 30px 25px 60px 25px;
+            position: relative;
+            z-index: 1;
+            max-width: 1200px;
+            width: 100%;
+        }
+
+        /* Header */
+        .app-header {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 30px;
+            gap: 12px;
+        }
+        .app-header .header-left {
+            display: flex;
+            flex-direction: column;
+        }
+        .app-header .header-left h1 {
+            font-size: 3rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, var(--text-primary) 0%, var(--accent) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 4px 20px var(--accent-glow);
+            letter-spacing: 1px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        .app-header .header-left h1 i {
+            -webkit-text-fill-color: initial;
+            color: var(--accent);
+            font-size: 2.2rem;
+            transition: color 0.4s ease;
+        }
+        .app-header .header-left .subtitle {
+            color: var(--subtitle-color);
+            font-size: 1rem;
+            margin-top: -8px;
+            letter-spacing: 1px;
+            transition: color 0.4s ease;
+        }
+        .app-header .header-left .subtitle a {
+            color: var(--subtitle-link);
+            text-decoration: none;
+            border-bottom: 1px dashed rgba(255, 255, 255, 0.3);
+            transition: border-color 0.2s, color 0.4s ease;
+        }
+        .app-header .header-left .subtitle a:hover {
+            border-color: var(--subtitle-link);
+        }
+
+        /* ---------- SETTINGS BUTTON (top right) ---------- */
+        .settings-btn-wrap {
+            position: relative;
+            flex-shrink: 0;
+        }
+        .settings-btn {
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            width: 52px;
+            height: 52px;
+            border-radius: 50%;
+            color: var(--settings-icon-color);
+            font-size: 1.4rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(6px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+        }
+        .settings-btn:hover {
+            background: var(--card-hover);
+            transform: rotate(60deg) scale(1.08);
+            border-color: var(--accent);
+            box-shadow: 0 0 30px var(--accent-glow);
+            color: var(--text-primary);
+        }
+        .settings-btn .badge-dot {
+            position: absolute;
+            top: 6px;
+            right: 6px;
+            width: 10px;
+            height: 10px;
+            background: var(--badge-dot-bg);
+            border-radius: 50%;
+            border: 2px solid #0b1a2e;
+            animation: pulse-dot 2s ease-in-out infinite;
+            transition: background 0.4s ease;
+        }
+        @keyframes pulse-dot {
+            0%,
+            100% {
+                opacity: 0.6;
+                transform: scale(0.9);
+            }
+            50% {
+                opacity: 1;
+                transform: scale(1.2);
+            }
+        }
+
+        /* ---------- SETTINGS MODAL ---------- */
+        .settings-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.6);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            z-index: 2000;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            animation: fadeIn 0.3s ease;
+        }
+        .settings-overlay.active {
+            display: flex;
+        }
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: scale(0.96);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        .settings-modal {
+            background: var(--modal-bg);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-radius: 28px;
+            border: 1px solid var(--modal-border);
+            max-width: 600px;
+            width: 100%;
+            max-height: 90vh;
+            overflow-y: auto;
+            padding: 32px 34px;
+            box-shadow: 0 30px 80px rgba(0, 0, 0, 0.6);
+            position: relative;
+            transition: background 0.4s ease, border-color 0.4s ease;
+        }
+        .settings-modal::-webkit-scrollbar {
+            width: 4px;
+        }
+        .settings-modal::-webkit-scrollbar-track {
+            background: rgba(255, 255, 255, 0.05);
+        }
+        .settings-modal::-webkit-scrollbar-thumb {
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 4px;
+        }
+
+        .settings-modal .modal-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 28px;
+            padding-bottom: 16px;
+            border-bottom: 1px solid var(--modal-header-border);
+            transition: border-color 0.4s ease;
+        }
+        .settings-modal .modal-header h2 {
+            font-size: 1.6rem;
+            font-weight: 700;
+            color: var(--modal-header-color);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            transition: color 0.4s ease;
+        }
+        .settings-modal .modal-header h2 i {
+            color: var(--accent);
+            font-size: 1.4rem;
+        }
+        .settings-modal .modal-close {
+            background: var(--close-btn-bg);
+            border: 1px solid var(--card-border);
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            color: var(--close-btn-color);
+            font-size: 1.3rem;
+            cursor: pointer;
+            transition: all 0.25s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .settings-modal .modal-close:hover {
+            background: var(--close-btn-hover);
+            color: var(--close-btn-hover-color);
+            transform: rotate(90deg);
+        }
+
+        .settings-modal .settings-section {
+            margin-bottom: 26px;
+        }
+        .settings-modal .settings-section:last-child {
+            margin-bottom: 0;
+        }
+        .settings-modal .settings-section h3 {
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            margin-bottom: 14px;
+            transition: color 0.4s ease;
+        }
+        .settings-modal .settings-section h3 i {
+            color: var(--accent);
+            margin-right: 8px;
+            transition: color 0.4s ease;
+        }
+
+        /* Stats grid */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+        }
+        .stat-card {
+            background: var(--stat-bg);
+            border-radius: 14px;
+            padding: 16px 18px;
+            border: 1px solid var(--stat-border);
+            text-align: center;
+            transition: background 0.4s ease, border-color 0.4s ease;
+        }
+        .stat-card .stat-number {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--stat-number);
+            line-height: 1.2;
+            transition: color 0.4s ease;
+        }
+        .stat-card .stat-label {
+            font-size: 0.75rem;
+            color: var(--stat-label);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-top: 4px;
+            transition: color 0.4s ease;
+        }
+
+        /* Theme selector */
+        .theme-selector {
+            display: flex;
+            gap: 14px;
+            flex-wrap: wrap;
+        }
+        .theme-option {
+            flex: 1;
+            min-width: 120px;
+            background: var(--card-bg);
+            border: 2px solid var(--card-border);
+            border-radius: 16px;
+            padding: 16px 18px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 6px;
+        }
+        .theme-option:hover {
+            background: var(--card-hover);
+            transform: translateY(-2px);
+        }
+        .theme-option.active {
+            border-color: var(--accent);
+            background: var(--card-hover);
+            box-shadow: 0 0 20px var(--accent-glow);
+        }
+        .theme-option .theme-preview {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            border: 2px solid var(--card-border);
+            transition: border-color 0.3s ease;
+        }
+        .theme-option .theme-preview.arctic {
+            background: linear-gradient(145deg, #0b1a2e, #4a8ea8);
+        }
+        .theme-option .theme-preview.strawberry {
+            background: linear-gradient(145deg, #fce4ec, #f48fb1);
+        }
+        .theme-option .theme-preview.midnight {
+            background: linear-gradient(145deg, #070614, #7ee8c8);
+        }
+        .theme-option .theme-name {
+            font-weight: 600;
+            font-size: 0.9rem;
+            color: var(--text-primary);
+            transition: color 0.4s ease;
+        }
+        .theme-option .theme-check {
+            color: var(--accent);
+            font-size: 0.9rem;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        .theme-option.active .theme-check {
+            opacity: 1;
+        }
+
+        .setting-stack {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        .setting-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 16px;
+            padding: 14px 16px;
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 14px;
+            transition: background 0.3s ease, border-color 0.3s ease;
+        }
+        .setting-row-text {
+            flex: 1;
+            min-width: 0;
+        }
+        .setting-row-title {
+            font-weight: 600;
+            font-size: 0.95rem;
+            color: var(--text-primary);
+        }
+        .setting-row-desc {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            margin-top: 3px;
+            line-height: 1.35;
+        }
+        .toggle-switch {
+            width: 48px;
+            height: 26px;
+            border-radius: 13px;
+            background: var(--input-bg);
+            border: 1px solid var(--input-border);
+            position: relative;
+            cursor: pointer;
+            flex-shrink: 0;
+            transition: background 0.2s ease, border-color 0.2s ease;
+        }
+        .toggle-switch.on {
+            background: var(--accent);
+            border-color: var(--accent);
+        }
+        .toggle-switch::after {
+            content: '';
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: #fff;
+            top: 2px;
+            left: 2px;
+            box-shadow: 0 1px 4px rgba(0, 0, 0, 0.25);
+            transition: transform 0.2s ease;
+        }
+        .toggle-switch.on::after {
+            transform: translateX(22px);
+        }
+        .font-scale-control {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            min-width: 140px;
+        }
+        .font-scale-control input[type="range"] {
+            width: 110px;
+            accent-color: var(--accent);
+        }
+        .font-scale-value {
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: var(--accent);
+            min-width: 38px;
+            text-align: right;
+        }
+        .recent-list {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+        .recent-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 10px;
+            padding: 10px 14px;
+            background: var(--stat-bg);
+            border: 1px solid var(--stat-border);
+            border-radius: 12px;
+            font-size: 0.9rem;
+        }
+        .recent-item .recent-name {
+            font-weight: 600;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+        .recent-item .recent-meta {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            flex-shrink: 0;
+        }
+        .recent-empty {
+            text-align: center;
+            color: var(--text-muted);
+            font-size: 0.85rem;
+            padding: 12px;
+        }
+        .shortcuts-list {
+            font-size: 0.82rem;
+            color: var(--text-muted);
+            line-height: 1.7;
+        }
+        .shortcuts-list kbd {
+            display: inline-block;
+            min-width: 1.4em;
+            padding: 1px 6px;
+            border-radius: 6px;
+            border: 1px solid var(--card-border);
+            background: var(--card-bg);
+            color: var(--text-primary);
+            font-family: inherit;
+            font-size: 0.78rem;
+        }
+        .play-count-badge {
+            font-size: 0.72rem;
+            font-weight: 600;
+            color: var(--count-color);
+            background: var(--count-bg);
+            border: 1px solid var(--count-border);
+            border-radius: 999px;
+            padding: 2px 8px;
+            margin-left: auto;
+            flex-shrink: 0;
+        }
+        body.hide-play-counts .play-count-badge {
+            display: none;
+        }
+        .game-btn.library-hidden,
+        #sections-container .buttons-container input[type="button"].library-hidden {
+            display: none;
+        }
+
+        /* Action buttons */
+        .settings-actions {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        .settings-action-btn {
+            background: var(--settings-action-bg);
+            border: 1px solid var(--settings-action-border);
+            padding: 14px 20px;
+            border-radius: 14px;
+            color: var(--settings-action-color);
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.25s ease;
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            text-align: left;
+            backdrop-filter: blur(4px);
+        }
+        .settings-action-btn i {
+            font-size: 1.2rem;
+            width: 28px;
+            text-align: center;
+            color: var(--accent);
+            transition: color 0.4s ease;
+        }
+        .settings-action-btn:hover {
+            background: var(--settings-action-hover);
+            border-color: var(--accent);
+            transform: translateX(4px);
+        }
+        .settings-action-btn:active {
+            transform: scale(0.98);
+        }
+        .settings-action-btn.export-btn {
+            border-left: 4px solid var(--accent);
+        }
+        .settings-action-btn.import-btn {
+            border-left: 4px solid var(--accent);
+        }
+        .settings-action-btn.clear-btn {
+            border-left: 4px solid #ef5350;
+            color: var(--text-muted);
+        }
+        .settings-action-btn.clear-btn:hover {
+            background: rgba(239, 83, 80, 0.15);
+            border-color: #ef5350;
+            color: var(--text-primary);
+        }
+        .settings-action-btn .btn-desc {
+            font-weight: 400;
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            margin-left: auto;
+            transition: color 0.4s ease;
+        }
+
+        /* ---------- TOAST ---------- */
+        .toast {
+            position: fixed;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%) translateY(80px);
+            background: var(--toast-bg);
+            backdrop-filter: blur(12px);
+            border: 1px solid var(--toast-border);
+            padding: 14px 28px;
+            border-radius: 16px;
+            color: var(--toast-text);
+            font-weight: 500;
+            z-index: 3000;
+            opacity: 0;
+            transition: all 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            pointer-events: none;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.4);
+            font-size: 0.95rem;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        .toast.show {
+            opacity: 1;
+            transform: translateX(-50%) translateY(0);
+            pointer-events: auto;
+        }
+        .toast.success i {
+            color: #81c784;
+        }
+        .toast.error i {
+            color: #ef5350;
+        }
+        .toast.info i {
+            color: var(--accent);
+        }
+
+        /* ---------- SEARCH & TOOLS ---------- */
+        .search-tools {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: center;
+            gap: 14px;
+            margin: 20px 0 30px;
+            width: 100%;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        .search-tools input[type="text"] {
+            flex: 1;
+            min-width: 200px;
+            padding: 14px 20px;
+            border-radius: 40px;
+            border: 1px solid var(--input-border);
+            background: var(--input-bg);
+            backdrop-filter: blur(6px);
+            color: var(--text-primary);
+            font-size: 1rem;
+            outline: none;
+            transition: all 0.3s;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+        .search-tools input[type="text"]::placeholder {
+            color: var(--search-placeholder);
+        }
+        .search-tools input[type="text"]:focus {
+            border-color: var(--input-focus);
+            background: var(--card-hover);
+            box-shadow: 0 0 25px var(--accent-glow);
+        }
+        .search-tools .load-btn {
+            background: var(--btn-bg);
+            border: 1px solid var(--btn-border);
+            padding: 12px 24px;
+            border-radius: 40px;
+            color: var(--text-primary);
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.25s;
+            backdrop-filter: blur(4px);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.95rem;
+        }
+        .search-tools .load-btn:hover {
+            background: var(--btn-hover);
+            border-color: var(--accent);
+            transform: scale(1.02);
+            box-shadow: 0 0 20px var(--accent-glow);
+        }
+        .filter-chips {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 8px;
+            margin: -10px auto 28px;
+            max-width: 700px;
+        }
+        .filter-chip {
+            background: var(--btn-bg);
+            border: 1px solid var(--btn-border);
+            color: var(--text-primary);
+            border-radius: 999px;
+            padding: 8px 16px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        .filter-chip:hover {
+            background: var(--btn-hover);
+            border-color: var(--accent);
+        }
+        .filter-chip.active {
+            background: var(--card-hover);
+            border-color: var(--accent);
+            box-shadow: 0 0 16px var(--accent-glow);
+        }
+
+        /* ---------- LETTER SECTIONS ---------- */
+        .letter-section {
+            margin-bottom: 44px;
+            padding: 0 10px;
+            min-height: 80px;
+        }
+        .letter-section.empty {
+            opacity: var(--empty-opacity);
+        }
+        .letter-header {
+            font-size: 2.2rem;
+            font-weight: 700;
+            color: var(--section-title);
+            margin-bottom: 16px;
+            padding-bottom: 8px;
+            border-bottom: 2px solid var(--letter-border);
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            text-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+            transition: color 0.4s ease, border-color 0.4s ease;
+        }
+        .letter-header i {
+            font-size: 1.6rem;
+            color: var(--accent);
+            transition: color 0.4s ease;
+        }
+        .letter-header .count {
+            font-size: 0.9rem;
+            font-weight: 400;
+            color: var(--count-color);
+            margin-left: auto;
+            background: var(--count-bg);
+            padding: 2px 14px;
+            border-radius: 30px;
+            border: 1px solid var(--count-border);
+            transition: color 0.4s ease, background 0.4s ease, border-color 0.4s ease;
+        }
+
+        /* ---------- GAME BUTTONS ---------- */
+        .buttons-container {
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+            align-items: center;
+        }
+
+        #sections-container .buttons-container input[type="button"] {
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-left: 6px solid var(--game-btn-border-left);
+            padding: 18px 28px;
+            font-size: calc(1.1rem * var(--font-scale));
+            font-weight: 600;
+            border-radius: 14px;
+            cursor: pointer;
+            width: 100%;
+            max-width: 620px;
+            color: var(--game-btn-text);
+            text-align: left;
+            transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            box-shadow: var(--game-btn-shadow);
+            letter-spacing: 0.3px;
+            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+            position: relative;
+            overflow: hidden;
+        }
+        #sections-container .buttons-container input[type="button"]::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.05), transparent 60%);
+            pointer-events: none;
+        }
+        #sections-container .buttons-container input[type="button"]:hover {
+            background: var(--card-hover);
+            border-color: var(--accent);
+            transform: translateX(8px) scale(1.02);
+            box-shadow: var(--game-btn-hover-shadow);
+            border-left-color: var(--accent);
+        }
+        #sections-container .buttons-container input[type="button"]:active {
+            transform: scale(0.98) translateX(0);
+        }
+
+        .game-btn {
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-left: 6px solid var(--game-btn-border-left);
+            padding: 18px 28px;
+            font-size: calc(1.1rem * var(--font-scale));
+            font-weight: 600;
+            border-radius: 14px;
+            cursor: pointer;
+            width: 100%;
+            max-width: 620px;
+            color: var(--game-btn-text);
+            text-align: left;
+            transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            box-shadow: var(--game-btn-shadow);
+            letter-spacing: 0.3px;
+            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            position: relative;
+            overflow: hidden;
+        }
+        .game-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.05), transparent 60%);
+            pointer-events: none;
+        }
+        .game-btn:hover {
+            background: var(--card-hover);
+            border-color: var(--accent);
+            transform: translateX(8px) scale(1.02);
+            box-shadow: var(--game-btn-hover-shadow);
+            border-left-color: var(--accent);
+        }
+        .game-btn:active {
+            transform: scale(0.98) translateX(0);
+        }
+        .game-btn i {
+            font-size: 1.4rem;
+            color: var(--accent);
+            width: 30px;
+            text-align: center;
+            transition: color 0.4s ease;
+        }
+        .game-btn .game-name {
+            flex: 1;
+        }
+
+        /* ---------- EMPTY MESSAGE ---------- */
+        .empty-message {
+            color: var(--empty-message-color);
+            font-style: italic;
+            text-align: center;
+            padding: 20px;
+            background: var(--empty-message-bg);
+            border-radius: 12px;
+            border: 1px solid var(--empty-message-border);
+            width: 100%;
+            max-width: 620px;
+            transition: color 0.4s ease, background 0.4s ease, border-color 0.4s ease;
+        }
+
+        /* ---------- FOOTER ---------- */
+        .footer {
+            margin-top: 50px;
+            text-align: center;
+            color: var(--footer-color);
+            font-size: 0.8rem;
+            border-top: 1px solid var(--card-border);
+            padding-top: 20px;
+            transition: color 0.4s ease, border-color 0.4s ease;
+        }
+
+        /* ---------- FAVORITE TOGGLE ---------- */
+        .favorite-toggle {
+            margin-left: auto;
+            cursor: pointer;
+            font-size: 1.2rem;
+            color: var(--star-color);
+            transition: all 0.25s ease;
+            flex-shrink: 0;
+            padding: 0 4px;
+            user-select: none;
+        }
+        .favorite-toggle:hover {
+            transform: scale(1.2);
+        }
+        .favorite-toggle.active {
+            color: var(--star-active);
+        }
+
+        /* ---------- RESPONSIVE ---------- */
+        @media (max-width: 768px) {
+            .sidebar {
+                width: 60px;
+                padding: 14px 4px;
+                gap: 4px;
+            }
+            .sidebar-btn {
+                padding: 8px 0;
+                font-size: 13px;
+                min-height: 36px;
+                border-radius: 8px;
+            }
+            .main-content {
+                margin-left: 70px;
+                padding: 20px 15px 40px;
+            }
+            .app-header .header-left h1 {
+                font-size: 2.2rem;
+            }
+            .app-header .header-left h1 i {
+                font-size: 1.6rem;
+            }
+            .settings-btn {
+                width: 44px;
+                height: 44px;
+                font-size: 1.2rem;
+            }
+            .settings-modal {
+                padding: 24px 20px;
+            }
+            .stats-grid {
+                grid-template-columns: 1fr 1fr;
+                gap: 8px;
+            }
+            .stat-card .stat-number {
+                font-size: 1.4rem;
+            }
+            .theme-selector {
+                flex-direction: row;
+            }
+            .theme-option {
+                min-width: 100px;
+                padding: 12px 14px;
+            }
+            .search-tools input[type="text"] {
+                min-width: 150px;
+                padding: 12px 16px;
+            }
+            .letter-header {
+                font-size: 1.8rem;
+            }
+            #sections-container .buttons-container input[type="button"] {
+                padding: 15px 20px;
+                font-size: 1rem;
+            }
+        }
+        @media (max-width: 480px) {
+            .sidebar {
+                width: 48px;
+                padding: 10px 2px;
+            }
+            .sidebar-btn {
+                font-size: 11px;
+                min-height: 30px;
+                padding: 4px 0;
+            }
+            .main-content {
+                margin-left: 56px;
+                padding: 15px 10px 30px;
+            }
+            .app-header .header-left h1 {
+                font-size: 1.7rem;
+            }
+            .app-header .header-left .subtitle {
+                font-size: 0.8rem;
+            }
+            .settings-btn {
+                width: 38px;
+                height: 38px;
+                font-size: 1rem;
+            }
+            .settings-modal {
+                padding: 18px 14px;
+                border-radius: 20px;
+            }
+            .settings-modal .modal-header h2 {
+                font-size: 1.3rem;
+            }
+            .stats-grid {
+                grid-template-columns: 1fr 1fr;
+                gap: 6px;
+            }
+            .stat-card {
+                padding: 12px 10px;
+            }
+            .stat-card .stat-number {
+                font-size: 1.2rem;
+            }
+            .theme-selector {
+                flex-direction: column;
+                gap: 10px;
+            }
+            .theme-option {
+                min-width: 0;
+                flex-direction: row;
+                padding: 12px 16px;
+                gap: 12px;
+            }
+            .setting-row {
+                flex-wrap: wrap;
+            }
+            .font-scale-control {
+                width: 100%;
+                justify-content: space-between;
+            }
+            .theme-option .theme-preview {
+                width: 32px;
+                height: 32px;
+                flex-shrink: 0;
+            }
+            .settings-action-btn {
+                padding: 12px 16px;
+                font-size: 0.9rem;
+            }
+            .search-tools {
+                flex-direction: column;
+                gap: 10px;
+            }
+            .search-tools input[type="text"] {
+                width: 100%;
+                min-width: 0;
+            }
+            .search-tools .load-btn {
+                width: 100%;
+                justify-content: center;
+            }
+            .letter-header {
+                font-size: 1.5rem;
+            }
+            #sections-container .buttons-container input[type="button"] {
+                padding: 12px 16px;
+                font-size: 0.9rem;
+                border-left-width: 4px;
+            }
+            .toast {
+                max-width: 90%;
+                font-size: 0.85rem;
+                padding: 12px 18px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ====== SIDEBAR ====== -->
+    <div class="sidebar" id="sidebar">
+        <!-- Letters injected by JavaScript -->
+    </div>
+
+    <!-- ====== MAIN CONTENT ====== -->
+    <div class="main-content">
+        <div class="app-header">
+            <div class="header-left">
+                <h1><i class="fas fa-snowflake"></i> Arctic 1.0 Games</h1>
+                <div class="subtitle">
+                    Made By Arctic 1.0
+                    <a href="https://guns.lol/mrtakeyadown999" target="_blank">About Me</a>
+                    &nbsp;·&nbsp; Discord:
+                    <a href="https://discord.gg/bKDKnYaayg" target="_blank">Join</a>
+                </div>
+            </div>
+            <div class="settings-btn-wrap">
+                <button class="settings-btn" id="settingsToggle" aria-label="Settings">
+                    <i class="fas fa-cog"></i>
+                    <span class="badge-dot"></span>
+                </button>
+            </div>
+        </div>
+
+        <div class="search-tools">
+            <input type="text" placeholder="Search games...  (press / )" id="searchInput" />
+            <button class="load-btn" id="lolbutton">
+                <i class="fas fa-sync-alt"></i> Load Games
+            </button>
+        </div>
+        <div class="filter-chips" id="filterChips">
+            <button class="filter-chip active" data-filter="all" type="button">All</button>
+            <button class="filter-chip" data-filter="favorites" type="button">Favorites</button>
+            <button class="filter-chip" data-filter="recent" type="button">Recent</button>
+            <button class="filter-chip" data-filter="most" type="button">Most played</button>
+        </div>
+
+        <!-- Container for letter sections -->
+        <div id="sections-container"></div>
+
+        <div class="footer">
+            Arctic 1.0 · Built for UGS · All games property of their respective owners
+        </div>
+    </div>
+
+    <!-- ====== SETTINGS MODAL ====== -->
+    <div class="settings-overlay" id="settingsOverlay">
+        <div class="settings-modal" role="dialog" aria-modal="true" aria-label="Settings">
+            <div class="modal-header">
+                <h2><i class="fas fa-cog"></i> Settings</h2>
+                <button class="modal-close" id="settingsClose" aria-label="Close settings">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+
+            <!-- Theme Selector -->
+            <div class="settings-section">
+                <h3><i class="fas fa-palette"></i> Choose Theme</h3>
+                <div class="theme-selector" id="themeSelector">
+                    <div class="theme-option active" data-theme="arctic" id="themeArctic">
+                        <div class="theme-preview arctic"></div>
+                        <span class="theme-name">Arctic Frost</span>
+                        <span class="theme-check"><i class="fas fa-check-circle"></i></span>
+                    </div>
+                    <div class="theme-option" data-theme="strawberry" id="themeStrawberry">
+                        <div class="theme-preview strawberry"></div>
+                        <span class="theme-name">Strawberry Blast</span>
+                        <span class="theme-check"><i class="fas fa-check-circle"></i></span>
+                    </div>
+                    <div class="theme-option" data-theme="midnight" id="themeMidnight">
+                        <div class="theme-preview midnight"></div>
+                        <span class="theme-name">Midnight Aurora</span>
+                        <span class="theme-check"><i class="fas fa-check-circle"></i></span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Appearance -->
+            <div class="settings-section">
+                <h3><i class="fas fa-sliders"></i> Appearance</h3>
+                <div class="setting-stack">
+                    <div class="setting-row">
+                        <div class="setting-row-text">
+                            <div class="setting-row-title">Compact list</div>
+                            <div class="setting-row-desc">Tighter spacing so more games fit on screen</div>
+                        </div>
+                        <button type="button" class="toggle-switch" id="toggleCompact" aria-label="Compact list"></button>
+                    </div>
+                    <div class="setting-row">
+                        <div class="setting-row-text">
+                            <div class="setting-row-title">Background pattern</div>
+                            <div class="setting-row-desc">Snowflake overlay behind the page</div>
+                        </div>
+                        <button type="button" class="toggle-switch on" id="togglePattern" aria-label="Background pattern"></button>
+                    </div>
+                    <div class="setting-row">
+                        <div class="setting-row-text">
+                            <div class="setting-row-title">Reduce motion</div>
+                            <div class="setting-row-desc">Turn off animations and hover motion</div>
+                        </div>
+                        <button type="button" class="toggle-switch" id="toggleMotion" aria-label="Reduce motion"></button>
+                    </div>
+                    <div class="setting-row">
+                        <div class="setting-row-text">
+                            <div class="setting-row-title">Game name size</div>
+                            <div class="setting-row-desc">Scale the text on game buttons</div>
+                        </div>
+                        <div class="font-scale-control">
+                            <input type="range" id="fontScaleRange" min="85" max="130" step="5" value="100" />
+                            <span class="font-scale-value" id="fontScaleValue">100%</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Library -->
+            <div class="settings-section">
+                <h3><i class="fas fa-layer-group"></i> Library</h3>
+                <div class="setting-stack">
+                    <div class="setting-row">
+                        <div class="setting-row-text">
+                            <div class="setting-row-title">Hide empty letters</div>
+                            <div class="setting-row-desc">Hide A–Z sections and sidebar letters with no games</div>
+                        </div>
+                        <button type="button" class="toggle-switch" id="toggleEmpty" aria-label="Hide empty letters"></button>
+                    </div>
+                    <div class="setting-row">
+                        <div class="setting-row-text">
+                            <div class="setting-row-title">Favorites first</div>
+                            <div class="setting-row-desc">Pin starred games to the top of each letter</div>
+                        </div>
+                        <button type="button" class="toggle-switch" id="toggleFavFirst" aria-label="Favorites first"></button>
+                    </div>
+                    <div class="setting-row">
+                        <div class="setting-row-text">
+                            <div class="setting-row-title">Show play counts</div>
+                            <div class="setting-row-desc">Display how many times you launched each game</div>
+                        </div>
+                        <button type="button" class="toggle-switch" id="togglePlayCounts" aria-label="Show play counts"></button>
+                    </div>
+                    <div class="setting-row">
+                        <div class="setting-row-text">
+                            <div class="setting-row-title">Remember search</div>
+                            <div class="setting-row-desc">Keep the last search when you reopen the page</div>
+                        </div>
+                        <button type="button" class="toggle-switch" id="toggleRememberSearch" aria-label="Remember search"></button>
+                    </div>
+                    <div class="setting-row">
+                        <div class="setting-row-text">
+                            <div class="setting-row-title">Toast messages</div>
+                            <div class="setting-row-desc">Pop-up confirmations for theme, export, and favorites</div>
+                        </div>
+                        <button type="button" class="toggle-switch on" id="toggleToasts" aria-label="Toast messages"></button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Progress Stats -->
+            <div class="settings-section">
+                <h3><i class="fas fa-chart-simple"></i> Your Progress</h3>
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-number" id="statGamesPlayed">0</div>
+                        <div class="stat-label">Games Played</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number" id="statTotalPlays">0</div>
+                        <div class="stat-label">Total Plays</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number" id="statFavorites">0</div>
+                        <div class="stat-label">Favorites</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number" id="statLastPlayed">—</div>
+                        <div class="stat-label">Last Played</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number" id="statMostPlayed">—</div>
+                        <div class="stat-label">Most Played</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="settings-section">
+                <h3><i class="fas fa-clock-rotate-left"></i> Recently Played</h3>
+                <div class="recent-list" id="recentList"></div>
+            </div>
+
+            <div class="settings-section">
+                <h3><i class="fas fa-keyboard"></i> Shortcuts</h3>
+                <div class="shortcuts-list">
+                    <div><kbd>/</kbd> Focus search</div>
+                    <div><kbd>Esc</kbd> Close settings</div>
+                    <div><kbd>Ctrl</kbd> + <kbd>,</kbd> Open settings</div>
+                </div>
+            </div>
+
+            <!-- Export / Import -->
+            <div class="settings-section">
+                <h3><i class="fas fa-file-export"></i> Save &amp; Load Progress</h3>
+                <div class="settings-actions">
+                    <button class="settings-action-btn export-btn" id="exportJsonBtn">
+                        <i class="fas fa-download"></i>
+                        <span>Download JSON <span style="font-weight:400;font-size:0.8rem;color:var(--text-muted);">(save all progress)</span></span>
+                        <span class="btn-desc">.json</span>
+                    </button>
+                    <button class="settings-action-btn import-btn" id="importJsonBtn">
+                        <i class="fas fa-upload"></i>
+                        <span>Upload JSON <span style="font-weight:400;font-size:0.8rem;color:var(--text-muted);">(restore progress)</span></span>
+                        <span class="btn-desc">.json</span>
+                    </button>
+                    <input type="file" id="importFileInput" accept=".json" style="display:none" />
+                    <button class="settings-action-btn clear-btn" id="clearDataBtn">
+                        <i class="fas fa-trash-alt"></i>
+                        <span>Clear All Progress</span>
+                        <span class="btn-desc">irreversible</span>
+                    </button>
+                    <button class="settings-action-btn" id="resetSettingsBtn">
+                        <i class="fas fa-rotate-left"></i>
+                        <span>Reset Settings</span>
+                        <span class="btn-desc">keeps progress</span>
+                    </button>
+                </div>
+            </div>
+
+            <div style="margin-top:20px;padding-top:16px;border-top:1px solid var(--card-border);font-size:0.75rem;color:var(--text-muted);text-align:center;transition:border-color 0.4s ease, color 0.4s ease;">
+                Progress and settings are stored locally in your browser.
+            </div>
+        </div>
+    </div>
+
+    <!-- ====== TOAST ====== -->
+    <div class="toast" id="toast">
+        <i class="fas fa-check-circle"></i>
+        <span id="toastMessage">Done!</span>
+    </div>
+
+    <!-- ====== SCRIPTS ====== -->
+    <script src="https://cdn.jsdelivr.net/gh/arcticmathisback/arcticgames@main/games.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/arcticmathisback/arcticgames@main/searchbut.js"></script>
+
+    <script>
+        (function() {
+            'use strict';
+
+            // ============================================================
+            //  1.  THEME SYSTEM
+            // ============================================================
+
+            const THEME_KEY = 'arctic_theme';
+            const SETTINGS_KEY = 'arctic_app_settings';
+            const SEARCH_KEY = 'arctic_last_search';
+            const THEME_LABELS = {
+                arctic: 'Arctic Frost',
+                strawberry: 'Strawberry Blast',
+                midnight: 'Midnight Aurora'
+            };
+            const THEME_ICONS = {
+                arctic: 'fas fa-snowflake',
+                strawberry: 'fas fa-heart',
+                midnight: 'fas fa-moon'
+            };
+
+            function getDefaultSettings() {
+                const prefersReduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+                return {
+                    compactMode: false,
+                    showPattern: true,
+                    reduceMotion: prefersReduce,
+                    hideEmptyLetters: false,
+                    favoritesFirst: false,
+                    showPlayCounts: false,
+                    rememberSearch: false,
+                    toasts: true,
+                    fontScale: 1,
+                    libraryFilter: 'all'
+                };
+            }
+
+            function loadSettings() {
+                try {
+                    const raw = localStorage.getItem(SETTINGS_KEY);
+                    if (raw) {
+                        return Object.assign(getDefaultSettings(), JSON.parse(raw));
+                    }
+                } catch (_) { /* ignore */ }
+                return getDefaultSettings();
+            }
+
+            function saveSettings(data) {
+                localStorage.setItem(SETTINGS_KEY, JSON.stringify(data));
+            }
+
+            let appSettings = loadSettings();
+
+            function getSavedTheme() {
+                try {
+                    const t = localStorage.getItem(THEME_KEY);
+                    if (t === 'strawberry' || t === 'midnight' || t === 'arctic') return t;
+                } catch (_) { /* ignore */ }
+                return 'arctic';
+            }
+
+            function setTheme(themeName) {
+                if (!THEME_LABELS[themeName]) themeName = 'arctic';
+                document.body.classList.remove('theme-arctic', 'theme-strawberry', 'theme-midnight');
+                document.body.classList.add('theme-' + themeName);
+                document.querySelectorAll('.theme-option').forEach(el => {
+                    el.classList.toggle('active', el.dataset.theme === themeName);
+                });
+                localStorage.setItem(THEME_KEY, themeName);
+                const snowIcon = document.querySelector('.app-header .header-left h1 i');
+                if (snowIcon) snowIcon.className = THEME_ICONS[themeName];
+            }
+
+            function setToggleState(id, on) {
+                const el = document.getElementById(id);
+                if (el) {
+                    el.classList.toggle('on', !!on);
+                    el.setAttribute('aria-pressed', on ? 'true' : 'false');
+                }
+            }
+
+            function syncSettingsUI() {
+                setToggleState('toggleCompact', appSettings.compactMode);
+                setToggleState('togglePattern', appSettings.showPattern);
+                setToggleState('toggleMotion', appSettings.reduceMotion);
+                setToggleState('toggleEmpty', appSettings.hideEmptyLetters);
+                setToggleState('toggleFavFirst', appSettings.favoritesFirst);
+                setToggleState('togglePlayCounts', appSettings.showPlayCounts);
+                setToggleState('toggleRememberSearch', appSettings.rememberSearch);
+                setToggleState('toggleToasts', appSettings.toasts);
+                const range = document.getElementById('fontScaleRange');
+                const label = document.getElementById('fontScaleValue');
+                const pct = Math.round((appSettings.fontScale || 1) * 100);
+                if (range) range.value = String(pct);
+                if (label) label.textContent = pct + '%';
+                document.querySelectorAll('.filter-chip').forEach(chip => {
+                    chip.classList.toggle('active', chip.dataset.filter === appSettings.libraryFilter);
+                });
+            }
+
+            function applySettings() {
+                document.body.classList.toggle('compact-mode', !!appSettings.compactMode);
+                document.body.classList.toggle('hide-pattern', !appSettings.showPattern);
+                document.body.classList.toggle('reduce-motion', !!appSettings.reduceMotion);
+                document.body.classList.toggle('hide-empty-letters', !!appSettings.hideEmptyLetters);
+                document.body.classList.toggle('hide-play-counts', !appSettings.showPlayCounts);
+                document.body.style.setProperty('--font-scale', String(appSettings.fontScale || 1));
+                syncSettingsUI();
+                refreshGameChrome();
+            }
+
+            function updateSetting(key, value) {
+                appSettings[key] = value;
+                saveSettings(appSettings);
+                applySettings();
+            }
+
+            function bindToggle(id, key) {
+                const el = document.getElementById(id);
+                if (!el) return;
+                el.addEventListener('click', function() {
+                    updateSetting(key, !appSettings[key]);
+                });
+            }
+
+            setTheme(getSavedTheme());
+
+            document.querySelectorAll('.theme-option').forEach(el => {
+                el.addEventListener('click', function() {
+                    const theme = this.dataset.theme;
+                    setTheme(theme);
+                    showToast('Switched to ' + (THEME_LABELS[theme] || theme), 'info');
+                });
+            });
+
+            // ============================================================
+            //  2.  GAME PROGRESS TRACKING
+            // ============================================================
+
+            const STORAGE_KEY = 'arctic_games_progress';
+
+            function getDefaultProgress() {
+                return {
+                    version: '1.0',
+                    games: {},
+                    totalPlays: 0,
+                    totalGames: 0,
+                    favorites: [],
+                    lastUpdated: null
+                };
+            }
+
+            function loadProgress() {
+                try {
+                    const raw = localStorage.getItem(STORAGE_KEY);
+                    if (raw) {
+                        const data = JSON.parse(raw);
+                        if (!data.games) data.games = {};
+                        if (!data.favorites) data.favorites = [];
+                        if (typeof data.totalPlays !== 'number') data.totalPlays = 0;
+                        if (typeof data.totalGames !== 'number') data.totalGames = 0;
+                        return data;
+                    }
+                } catch (_) { /* ignore */ }
+                return getDefaultProgress();
+            }
+
+            function saveProgress(data) {
+                data.lastUpdated = new Date().toISOString();
+                localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
+                updateStatsUI(data);
+            }
+
+            function trackGamePlay(gameName) {
+                if (!gameName || gameName.trim() === '') return;
+                const name = gameName.trim();
+                const data = loadProgress();
+
+                if (!data.games[name]) {
+                    data.games[name] = {
+                        playCount: 0,
+                        firstPlayed: new Date().toISOString(),
+                        lastPlayed: null,
+                        favorite: false
+                    };
+                    data.totalGames += 1;
+                }
+                data.games[name].playCount += 1;
+                data.games[name].lastPlayed = new Date().toISOString();
+                data.totalPlays += 1;
+                saveProgress(data);
+            }
+
+            function toggleFavorite(gameName) {
+                if (!gameName) return false;
+                const data = loadProgress();
+                if (!data.games[gameName]) {
+                    data.games[gameName] = {
+                        playCount: 0,
+                        firstPlayed: new Date().toISOString(),
+                        lastPlayed: null,
+                        favorite: false
+                    };
+                    data.totalGames += 1;
+                }
+                data.games[gameName].favorite = !data.games[gameName].favorite;
+                const fav = data.games[gameName].favorite;
+                if (fav) {
+                    if (!data.favorites.includes(gameName)) data.favorites.push(gameName);
+                } else {
+                    data.favorites = data.favorites.filter(f => f !== gameName);
+                }
+                saveProgress(data);
+                return fav;
+            }
+
+            function getAllGameButtons() {
+                return document.querySelectorAll(
+                    '#sections-container .buttons-container input[type="button"], .game-btn'
+                );
+            }
+
+            function getRecentNames(limit) {
+                const d = loadProgress();
+                return Object.keys(d.games).map(name => ({
+                    name,
+                    lastPlayed: d.games[name].lastPlayed
+                })).filter(g => g.lastPlayed).sort((a, b) => new Date(b.lastPlayed) - new Date(a.lastPlayed))
+                    .slice(0, limit || 20).map(g => g.name);
+            }
+
+            function getMostPlayedNames(limit) {
+                const d = loadProgress();
+                return Object.keys(d.games).map(name => ({
+                    name,
+                    playCount: d.games[name].playCount || 0
+                })).filter(g => g.playCount > 0).sort((a, b) => b.playCount - a.playCount)
+                    .slice(0, limit || 20).map(g => g.name);
+            }
+
+            function applyLibraryFilter() {
+                const filter = appSettings.libraryFilter || 'all';
+                const data = loadProgress();
+                const favs = new Set(data.favorites || []);
+                const recent = new Set(getRecentNames(25));
+                const most = new Set(getMostPlayedNames(25));
+                getAllGameButtons().forEach(btn => {
+                    const name = getGameNameFromButton(btn);
+                    let show = true;
+                    if (filter === 'favorites') show = favs.has(name);
+                    else if (filter === 'recent') show = recent.has(name);
+                    else if (filter === 'most') show = most.has(name);
+                    btn.classList.toggle('library-hidden', !show);
+                });
+                document.querySelectorAll('.letter-section').forEach(section => {
+                    const visible = section.querySelectorAll('.buttons-container input[type="button"]:not(.library-hidden)').length;
+                    const empty = section.querySelectorAll('.buttons-container input[type="button"]').length === 0;
+                    if (filter !== 'all') {
+                        section.style.display = visible ? '' : 'none';
+                    } else {
+                        section.style.display = '';
+                        section.classList.toggle('empty', empty);
+                    }
+                });
+            }
+
+            function sortGamesInSections() {
+                const data = loadProgress();
+                document.querySelectorAll('#sections-container .buttons-container').forEach(container => {
+                    const btns = Array.from(container.querySelectorAll('input[type="button"], .game-btn'));
+                    if (!btns.length) return;
+                    btns.forEach((btn, i) => {
+                        if (btn.dataset.origIndex === undefined) btn.dataset.origIndex = String(i);
+                    });
+                    btns.sort((a, b) => {
+                        if (appSettings.favoritesFirst) {
+                            const aName = getGameNameFromButton(a);
+                            const bName = getGameNameFromButton(b);
+                            const aFav = !!(data.games[aName] && data.games[aName].favorite);
+                            const bFav = !!(data.games[bName] && data.games[bName].favorite);
+                            if (aFav !== bFav) return aFav ? -1 : 1;
+                        }
+                        return Number(a.dataset.origIndex) - Number(b.dataset.origIndex);
+                    });
+                    btns.forEach(btn => container.appendChild(btn));
+                });
+            }
+
+            function injectPlayCounts() {
+                getAllGameButtons().forEach(btn => {
+                    const existing = btn.querySelector('.play-count-badge');
+                    if (!appSettings.showPlayCounts) {
+                        if (existing) existing.remove();
+                        return;
+                    }
+                    const name = getGameNameFromButton(btn);
+                    const prog = getGameProgress(name);
+                    const count = prog ? (prog.playCount || 0) : 0;
+                    if (!count) {
+                        if (existing) existing.remove();
+                        return;
+                    }
+                    let badge = existing;
+                    if (!badge) {
+                        badge = document.createElement('span');
+                        badge.className = 'play-count-badge';
+                        const star = btn.querySelector('.favorite-toggle');
+                        if (star) star.before(badge);
+                        else btn.appendChild(badge);
+                    }
+                    badge.textContent = count + (count === 1 ? ' play' : ' plays');
+                });
+            }
+
+            function getGameProgress(gameName) {
+                const data = loadProgress();
+                return data.games[gameName] || null;
+            }
+
+            // ============================================================
+            //  3.  UI STATS UPDATE
+            // ============================================================
+
+            function updateStatsUI(data) {
+                const d = data || loadProgress();
+                const games = Object.keys(d.games);
+                const totalGames = games.length;
+                const totalPlays = d.totalPlays || 0;
+                const favs = d.favorites || [];
+
+                document.getElementById('statGamesPlayed').textContent = totalGames;
+                document.getElementById('statTotalPlays').textContent = totalPlays;
+                document.getElementById('statFavorites').textContent = favs.length;
+
+                let last = '—';
+                let lastTime = 0;
+                for (const g of games) {
+                    const ts = d.games[g].lastPlayed;
+                    if (ts) {
+                        const t = new Date(ts).getTime();
+                        if (t > lastTime) { lastTime = t;
+                            last = new Date(ts).toLocaleDateString(); }
+                    }
+                }
+                document.getElementById('statLastPlayed').textContent = last;
+
+                const mostEl = document.getElementById('statMostPlayed');
+                if (mostEl) {
+                    let bestName = '—';
+                    let bestCount = 0;
+                    for (const g of games) {
+                        const c = d.games[g].playCount || 0;
+                        if (c > bestCount) {
+                            bestCount = c;
+                            bestName = g.length > 14 ? g.slice(0, 13) + '…' : g;
+                        }
+                    }
+                    mostEl.textContent = bestCount > 0 ? bestName : '—';
+                    mostEl.title = bestCount > 0 ? bestCount + ' plays' : '';
+                }
+                renderRecentList(d);
+            }
+
+            function renderRecentList(data) {
+                const list = document.getElementById('recentList');
+                if (!list) return;
+                const d = data || loadProgress();
+                const games = Object.keys(d.games).map(name => ({
+                    name,
+                    lastPlayed: d.games[name].lastPlayed,
+                    playCount: d.games[name].playCount || 0
+                })).filter(g => g.lastPlayed).sort((a, b) => new Date(b.lastPlayed) - new Date(a.lastPlayed)).slice(0, 6);
+
+                if (!games.length) {
+                    list.innerHTML = '<div class="recent-empty">Play a game to see it here.</div>';
+                    return;
+                }
+                list.innerHTML = games.map(g => {
+                    const when = new Date(g.lastPlayed).toLocaleDateString();
+                    return '<div class="recent-item"><span class="recent-name">' +
+                        escapeHtml(g.name) + '</span><span class="recent-meta">' +
+                        g.playCount + ' · ' + when + '</span></div>';
+                }).join('');
+            }
+
+            function escapeHtml(str) {
+                return String(str).replace(/[&<>"']/g, function(ch) {
+                    return ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[ch];
+                });
+            }
+
+            // ============================================================
+            //  4.  EXPORT / IMPORT JSON
+            // ============================================================
+
+            function exportJSON() {
+                const data = loadProgress();
+                data.settings = appSettings;
+                data.theme = getSavedTheme();
+                const json = JSON.stringify(data, null, 2);
+                const blob = new Blob([json], { type: 'application/json' });
+                const url = URL.createObjectURL(blob);
+                const a = document.createElement('a');
+                a.href = url;
+                const dateStr = new Date().toISOString().slice(0, 10);
+                a.download = `arctic-progress-${dateStr}.json`;
+                document.body.appendChild(a);
+                a.click();
+                document.body.removeChild(a);
+                URL.revokeObjectURL(url);
+                showToast('Progress exported successfully!', 'success');
+            }
+
+            function importJSON(file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    try {
+                        const data = JSON.parse(e.target.result);
+                        if (!data.games || typeof data.games !== 'object') {
+                            throw new Error('Invalid progress file: missing "games" object.');
+                        }
+                        if (typeof data.totalPlays !== 'number') data.totalPlays = 0;
+                        if (typeof data.totalGames !== 'number') data.totalGames = 0;
+                        if (!data.favorites) data.favorites = [];
+                        for (const key of Object.keys(data.games)) {
+                            const g = data.games[key];
+                            if (typeof g.playCount !== 'number') g.playCount = 0;
+                            if (!g.firstPlayed) g.firstPlayed = new Date().toISOString();
+                            if (!g.lastPlayed) g.lastPlayed = null;
+                            if (typeof g.favorite !== 'boolean') g.favorite = false;
+                        }
+                        data.favorites = Object.keys(data.games).filter(k => data.games[k].favorite === true);
+                        if (data.settings && typeof data.settings === 'object') {
+                            appSettings = Object.assign(getDefaultSettings(), data.settings);
+                            saveSettings(appSettings);
+                        }
+                        if (data.theme) setTheme(data.theme);
+                        saveProgress(data);
+                        applySettings();
+                        showToast('Progress restored successfully!', 'success');
+                        updateStatsUI(data);
+                    } catch (err) {
+                        showToast('Error: ' + err.message, 'error');
+                    }
+                };
+                reader.onerror = function() {
+                    showToast('Failed to read file.', 'error');
+                };
+                reader.readAsText(file);
+            }
+
+            // ============================================================
+            //  5.  CLEAR DATA
+            // ============================================================
+
+            function clearAllProgress() {
+                if (!confirm('Are you sure you want to delete ALL progress data? This cannot be undone.')) return;
+                const empty = getDefaultProgress();
+                saveProgress(empty);
+                updateStatsUI(empty);
+                showToast('All progress cleared.', 'info');
+            }
+
+            // ============================================================
+            //  6.  TOAST NOTIFICATION
+            // ============================================================
+
+            let toastTimer = null;
+
+            function showToast(message, type) {
+                if (appSettings && appSettings.toasts === false) return;
+                const toast = document.getElementById('toast');
+                const msgEl = document.getElementById('toastMessage');
+                const icon = toast.querySelector('i');
+                toast.className = 'toast';
+                if (type === 'success') {
+                    toast.classList.add('success');
+                    icon.className = 'fas fa-check-circle';
+                } else if (type === 'error') {
+                    toast.classList.add('error');
+                    icon.className = 'fas fa-exclamation-circle';
+                } else {
+                    toast.classList.add('info');
+                    icon.className = 'fas fa-info-circle';
+                }
+                msgEl.textContent = message;
+                toast.classList.add('show');
+                clearTimeout(toastTimer);
+                toastTimer = setTimeout(() => {
+                    toast.classList.remove('show');
+                }, 3500);
+            }
+
+            // ============================================================
+            //  7.  SETTINGS MODAL TOGGLE
+            // ============================================================
+
+            const overlay = document.getElementById('settingsOverlay');
+            const toggleBtn = document.getElementById('settingsToggle');
+            const closeBtn = document.getElementById('settingsClose');
+
+            function openSettings() {
+                updateStatsUI();
+                overlay.classList.add('active');
+                document.body.style.overflow = 'hidden';
+            }
+
+            function closeSettings() {
+                overlay.classList.remove('active');
+                document.body.style.overflow = '';
+            }
+
+            toggleBtn.addEventListener('click', openSettings);
+            closeBtn.addEventListener('click', closeSettings);
+            overlay.addEventListener('click', function(e) {
+                if (e.target === overlay) closeSettings();
+            });
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'Escape' && overlay.classList.contains('active')) closeSettings();
+                if ((e.ctrlKey || e.metaKey) && e.key === ',') {
+                    e.preventDefault();
+                    if (overlay.classList.contains('active')) closeSettings();
+                    else openSettings();
+                }
+                if (e.key === '/' && !overlay.classList.contains('active')) {
+                    const tag = (e.target && e.target.tagName) || '';
+                    if (tag !== 'INPUT' && tag !== 'TEXTAREA') {
+                        e.preventDefault();
+                        const search = document.getElementById('searchInput');
+                        if (search) search.focus();
+                    }
+                }
+            });
+
+            // ============================================================
+            //  8.  SETTINGS BUTTON HANDLERS
+            // ============================================================
+
+            document.getElementById('exportJsonBtn').addEventListener('click', exportJSON);
+            document.getElementById('importJsonBtn').addEventListener('click', function() {
+                document.getElementById('importFileInput').click();
+            });
+            document.getElementById('importFileInput').addEventListener('change', function(e) {
+                if (this.files && this.files.length > 0) {
+                    importJSON(this.files[0]);
+                }
+                this.value = '';
+            });
+            document.getElementById('clearDataBtn').addEventListener('click', clearAllProgress);
+            document.getElementById('resetSettingsBtn').addEventListener('click', function() {
+                appSettings = getDefaultSettings();
+                saveSettings(appSettings);
+                applySettings();
+                showToast('Settings reset. Progress was kept.', 'info');
+            });
+
+            bindToggle('toggleCompact', 'compactMode');
+            bindToggle('togglePattern', 'showPattern');
+            bindToggle('toggleMotion', 'reduceMotion');
+            bindToggle('toggleEmpty', 'hideEmptyLetters');
+            bindToggle('toggleFavFirst', 'favoritesFirst');
+            bindToggle('togglePlayCounts', 'showPlayCounts');
+            bindToggle('toggleRememberSearch', 'rememberSearch');
+            bindToggle('toggleToasts', 'toasts');
+
+            const fontRange = document.getElementById('fontScaleRange');
+            if (fontRange) {
+                fontRange.addEventListener('input', function() {
+                    const pct = parseInt(this.value, 10) || 100;
+                    document.getElementById('fontScaleValue').textContent = pct + '%';
+                    updateSetting('fontScale', pct / 100);
+                });
+            }
+
+            document.getElementById('filterChips').addEventListener('click', function(e) {
+                const chip = e.target.closest('.filter-chip');
+                if (!chip) return;
+                updateSetting('libraryFilter', chip.dataset.filter);
+            });
+
+            // ============================================================
+            //  9.  TRACK GAME CLICKS
+            // ============================================================
+
+            function getGameNameFromButton(btn) {
+                if (btn.value && btn.value.trim() !== '') return btn.value.trim();
+                const nameSpan = btn.querySelector('.game-name');
+                if (nameSpan) return nameSpan.textContent.trim();
+                let txt = btn.textContent.replace(/[★☆]\s*/, '').trim();
+                return txt || 'Unknown Game';
+            }
+
+            document.addEventListener('click', function(e) {
+                let btn = e.target.closest('.buttons-container input[type="button"]');
+                if (!btn) btn = e.target.closest('.game-btn');
+                if (!btn) return;
+                if (e.target.closest('.favorite-toggle')) return;
+                const gameName = getGameNameFromButton(btn);
+                if (gameName && gameName !== 'Unknown Game') {
+                    trackGamePlay(gameName);
+                    if (appSettings.showPlayCounts) injectPlayCounts();
+                    if (appSettings.libraryFilter === 'recent' || appSettings.libraryFilter === 'most') {
+                        applyLibraryFilter();
+                    }
+                }
+            });
+
+            // ============================================================
+            //  10. FAVORITE TOGGLES
+            // ============================================================
+
+            function injectFavoriteToggles() {
+                const allGameBtns = document.querySelectorAll(
+                    '#sections-container .buttons-container input[type="button"], .game-btn'
+                );
+                allGameBtns.forEach(btn => {
+                    if (btn.querySelector('.favorite-toggle')) return;
+                    const name = getGameNameFromButton(btn);
+                    const prog = getGameProgress(name);
+                    const isFav = prog ? prog.favorite : false;
+
+                    const star = document.createElement('span');
+                    star.className = 'favorite-toggle' + (isFav ? ' active' : '');
+                    star.innerHTML = isFav ? '★' : '☆';
+                    star.title = isFav ? 'Remove from favorites' : 'Add to favorites';
+
+                    star.addEventListener('click', function(e) {
+                        e.stopPropagation();
+                        const gName = getGameNameFromButton(btn);
+                        const newFav = toggleFavorite(gName);
+                        star.innerHTML = newFav ? '★' : '☆';
+                        star.classList.toggle('active', newFav);
+                        star.title = newFav ? 'Remove from favorites' : 'Add to favorites';
+                        updateStatsUI();
+                        showToast(newFav ? `Added "${gName}" to favorites` : `Removed "${gName}" from favorites`,
+                            'info');
+                        refreshGameChrome();
+                    });
+
+                    const nameSpan = btn.querySelector('.game-name');
+                    if (nameSpan) {
+                        nameSpan.after(star);
+                    } else {
+                        btn.appendChild(star);
+                    }
+                });
+            }
+
+            let layoutLock = false;
+            let gameObserver = null;
+            function refreshGameChrome() {
+                if (layoutLock) return;
+                layoutLock = true;
+                if (gameObserver) gameObserver.disconnect();
+                try {
+                    injectFavoriteToggles();
+                    injectPlayCounts();
+                    sortGamesInSections();
+                    applyLibraryFilter();
+                } finally {
+                    if (gameObserver && sectionsContainer) {
+                        gameObserver.observe(sectionsContainer, { childList: true, subtree: true });
+                    }
+                    layoutLock = false;
+                }
+            }
+
+            const sectionsContainer = document.getElementById('sections-container');
+            if (sectionsContainer) {
+                gameObserver = new MutationObserver(function() {
+                    refreshGameChrome();
+                    updateSidebarStates();
+                    updateStatsUI();
+                });
+                gameObserver.observe(sectionsContainer, { childList: true, subtree: true });
+            }
+
+            setTimeout(() => {
+                refreshGameChrome();
+                updateStatsUI();
+            }, 800);
+
+            document.getElementById('lolbutton').addEventListener('click', function() {
+                setTimeout(() => {
+                    refreshGameChrome();
+                    updateStatsUI();
+                }, 600);
+            });
+
+            // ============================================================
+            //  11. SIDEBAR
+            // ============================================================
+
+            function buildSidebar() {
+                const sidebar = document.getElementById('sidebar');
+                if (!sidebar) return;
+                sidebar.innerHTML = '';
+                for (let i = 65; i <= 90; i++) {
+                    const letter = String.fromCharCode(i);
+                    const btn = document.createElement('button');
+                    btn.className = 'sidebar-btn';
+                    btn.dataset.letter = letter;
+                    btn.textContent = letter;
+                    btn.addEventListener('click', function() {
+                        const section = document.getElementById('section-' + letter);
+                        if (section) {
+                            section.scrollIntoView({
+                                behavior: appSettings.reduceMotion ? 'auto' : 'smooth',
+                                block: 'start'
+                            });
+                        }
+                    });
+                    sidebar.appendChild(btn);
+                }
+                const topBtn = document.createElement('button');
+                topBtn.className = 'sidebar-btn';
+                topBtn.innerHTML = '<i class="fas fa-arrow-up"></i>';
+                topBtn.title = 'Back to top';
+                topBtn.addEventListener('click', function() {
+                    window.scrollTo({ top: 0, behavior: appSettings.reduceMotion ? 'auto' : 'smooth' });
+                });
+                sidebar.appendChild(topBtn);
+            }
+
+            function updateSidebarStates() {
+                const buttons = document.querySelectorAll('.sidebar-btn');
+                buttons.forEach(btn => {
+                    const letter = btn.dataset.letter;
+                    if (!letter) return;
+                    const section = document.getElementById('section-' + letter);
+                    if (section) {
+                        const hasGames = section.querySelector('.buttons-container input[type="button"]') !== null;
+                        btn.classList.toggle('empty', !hasGames);
+                    } else {
+                        btn.classList.add('empty');
+                    }
+                });
+            }
+
+            if (document.readyState === 'loading') {
+                document.addEventListener('DOMContentLoaded', buildSidebar);
+            } else {
+                buildSidebar();
+            }
+
+            if (sectionsContainer) {
+                const sidebarObserver = new MutationObserver(function() {
+                    updateSidebarStates();
+                    document.querySelectorAll('.letter-section').forEach(section => {
+                        const header = section.querySelector('.letter-header');
+                        if (header) {
+                            const countEl = header.querySelector('.count');
+                            const btns = section.querySelectorAll('.buttons-container input[type="button"]');
+                            if (countEl) {
+                                countEl.textContent = btns.length > 0 ? btns.length + ' games' : '';
+                            }
+                        }
+                    });
+                });
+                sidebarObserver.observe(sectionsContainer, { childList: true, subtree: true });
+            }
+
+            setTimeout(updateSidebarStates, 600);
+
+            // ============================================================
+            //  12. FETCH OVERRIDE (point to your fork)
+            // ============================================================
+
+            (function() {
+                const originalFetch = window.fetch;
+                window.fetch = function(url, options) {
+                    if (typeof url === 'string' && url.includes('bubbls/ugs-singlefile/UGS-Files')) {
+                        url = url.replace('bubbls/ugs-singlefile', 'arcticmathisback/arcticgames');
+                    }
+                    return originalFetch.call(this, url, options);
+                };
+            })();
+
+            // ============================================================
+            //  13. SEARCH RE-INJECT
+            // ============================================================
+
+            let injectionInterval = setInterval(() => {
+                const container = document.getElementById('sections-container');
+                if (container && container.children.length > 0) {
+                    refreshGameChrome();
+                }
+            }, 2000);
+
+            setTimeout(() => {
+                clearInterval(injectionInterval);
+            }, 10000);
+
+            const searchInput = document.getElementById('searchInput');
+            if (searchInput) {
+                if (appSettings.rememberSearch) {
+                    try {
+                        const saved = localStorage.getItem(SEARCH_KEY);
+                        if (saved) searchInput.value = saved;
+                    } catch (_) { /* ignore */ }
+                }
+                let debounceTimer;
+                searchInput.addEventListener('input', function() {
+                    if (appSettings.rememberSearch) {
+                        try { localStorage.setItem(SEARCH_KEY, searchInput.value); } catch (_) { /* ignore */ }
+                    }
+                    clearTimeout(debounceTimer);
+                    debounceTimer = setTimeout(() => {
+                        refreshGameChrome();
+                    }, 400);
+                });
+            }
+
+            applySettings();
+            updateStatsUI();
+
+            console.log('Arctic 1.0 Games — Theme, settings & progress tracking enabled.');
+
+        })();
+    </script>
+</body>
+</html>
