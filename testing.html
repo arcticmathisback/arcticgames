@@ -215,6 +215,75 @@
             --empty-message-border: rgba(126, 232, 200, 0.12);
         }
 
+        /* ---------- SUNSET BLAZE THEME ---------- */
+        body.theme-sunset {
+            --bg-gradient: linear-gradient(145deg, #2b0f30 0%, #7a2c4a 40%, #ff7b54 100%);
+            --sidebar-bg: rgba(35, 10, 20, 0.82);
+            --sidebar-border: rgba(255, 180, 120, 0.14);
+            --text-primary: #fff8f0;
+            --text-secondary: rgba(255, 248, 240, 0.72);
+            --text-muted: rgba(255, 248, 240, 0.4);
+            --text-inverse: #2b0f30;
+            --accent: #ffb347;
+            --accent-dark: #ff8c42;
+            --accent-glow: rgba(255, 140, 66, 0.25);
+            --card-bg: rgba(255, 255, 255, 0.08);
+            --card-border: rgba(255, 179, 71, 0.16);
+            --card-hover: rgba(255, 255, 255, 0.15);
+            --modal-bg: rgba(30, 10, 20, 0.93);
+            --modal-border: rgba(255, 179, 71, 0.18);
+            --input-bg: rgba(255, 255, 255, 0.08);
+            --input-border: rgba(255, 179, 71, 0.2);
+            --input-focus: rgba(255, 179, 71, 0.5);
+            --btn-bg: rgba(255, 255, 255, 0.08);
+            --btn-hover: rgba(255, 255, 255, 0.18);
+            --btn-border: rgba(255, 179, 71, 0.22);
+            --letter-color: #ffe3c2;
+            --letter-border: rgba(255, 179, 71, 0.16);
+            --game-btn-border-left: #ff8c42;
+            --game-btn-shadow: 0 4px 15px rgba(0, 0, 0, 0.28);
+            --game-btn-hover-shadow: 0 8px 30px rgba(255, 140, 66, 0.3);
+            --toast-bg: rgba(30, 10, 20, 0.93);
+            --stat-bg: rgba(255, 255, 255, 0.06);
+            --stat-border: rgba(255, 179, 71, 0.12);
+            --empty-opacity: 0.3;
+            --footer-color: rgba(255, 255, 255, 0.22);
+            --settings-icon-color: #ffe3c2;
+            --badge-dot-bg: #ff8c42;
+            --snowflake-opacity: 0.05;
+            --sidebar-btn-color: #ffe3c2;
+            --sidebar-btn-hover: #fff;
+            --sidebar-btn-shadow: rgba(255, 140, 66, 0.25);
+            --game-btn-text: #fff8f0;
+            --game-btn-shadow-hover: rgba(255, 140, 66, 0.3);
+            --toast-border: rgba(255, 179, 71, 0.18);
+            --toast-text: #fff8f0;
+            --stat-number: #ffb347;
+            --stat-label: rgba(255, 255, 255, 0.42);
+            --settings-action-bg: rgba(255, 255, 255, 0.06);
+            --settings-action-border: rgba(255, 179, 71, 0.14);
+            --settings-action-hover: rgba(255, 255, 255, 0.12);
+            --settings-action-color: #fff3e6;
+            --modal-header-border: rgba(255, 179, 71, 0.14);
+            --modal-header-color: #fff3e6;
+            --close-btn-bg: rgba(255, 255, 255, 0.06);
+            --close-btn-hover: rgba(255, 255, 255, 0.16);
+            --close-btn-color: rgba(255, 255, 255, 0.6);
+            --close-btn-hover-color: #fff;
+            --section-title: #ffe3c2;
+            --count-bg: rgba(255, 179, 71, 0.1);
+            --count-border: rgba(255, 179, 71, 0.14);
+            --count-color: rgba(255, 255, 255, 0.45);
+            --star-color: rgba(255, 255, 255, 0.22);
+            --star-active: #ffd54f;
+            --search-placeholder: rgba(255, 255, 255, 0.5);
+            --subtitle-color: rgba(255, 255, 255, 0.72);
+            --subtitle-link: #ffb347;
+            --empty-message-color: rgba(255, 255, 255, 0.4);
+            --empty-message-bg: rgba(255, 255, 255, 0.04);
+            --empty-message-border: rgba(255, 179, 71, 0.14);
+        }
+
         /* ---------- RESET & GLOBAL ---------- */
         * {
             margin: 0;
@@ -665,6 +734,9 @@
         .theme-option .theme-preview.midnight {
             background: linear-gradient(145deg, #070614, #7ee8c8);
         }
+        .theme-option .theme-preview.sunset {
+            background: linear-gradient(145deg, #2b0f30, #ff7b54);
+        }
         .theme-option .theme-name {
             font-weight: 600;
             font-size: 0.9rem;
@@ -1009,6 +1081,33 @@
             border-color: var(--accent);
             box-shadow: 0 0 16px var(--accent-glow);
         }
+        .search-tools .random-btn i {
+            transition: transform 0.4s ease;
+        }
+        .search-tools .random-btn:hover i {
+            transform: rotate(20deg);
+        }
+        .game-btn.surprise-pick,
+        #sections-container .buttons-container input[type="button"].surprise-pick {
+            animation: surprise-glow 1.6s ease;
+            position: relative;
+            z-index: 2;
+        }
+        body.reduce-motion .surprise-pick {
+            animation: none;
+            box-shadow: 0 0 0 4px var(--accent-glow);
+        }
+        @keyframes surprise-glow {
+            0% {
+                box-shadow: 0 0 0 0 var(--accent-glow);
+            }
+            25% {
+                box-shadow: 0 0 0 6px var(--accent-glow), var(--game-btn-hover-shadow);
+            }
+            100% {
+                box-shadow: 0 0 0 0 rgba(0, 0, 0, 0);
+            }
+        }
 
         /* ---------- LETTER SECTIONS ---------- */
         .letter-section {
@@ -1195,32 +1294,6 @@
             color: var(--star-active);
         }
 
-        /* ---------- BACK TO TOP BUTTON ---------- */
-        .back-to-top {
-            position: fixed;
-            bottom: 30px;
-            right: 30px;
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            background: var(--accent);
-            color: var(--text-inverse);
-            border: none;
-            font-size: 1.5rem;
-            cursor: pointer;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
-            transition: all 0.3s ease;
-            z-index: 1000;
-            display: none;
-            /* hidden by default, shown with JS */
-            align-items: center;
-            justify-content: center;
-        }
-        .back-to-top:hover {
-            transform: scale(1.1);
-            box-shadow: 0 0 30px var(--accent-glow);
-        }
-
         /* ---------- RESPONSIVE ---------- */
         @media (max-width: 768px) {
             .sidebar {
@@ -1276,13 +1349,6 @@
             #sections-container .buttons-container input[type="button"] {
                 padding: 15px 20px;
                 font-size: 1rem;
-            }
-            .back-to-top {
-                width: 44px;
-                height: 44px;
-                font-size: 1.2rem;
-                bottom: 20px;
-                right: 20px;
             }
         }
         @media (max-width: 480px) {
@@ -1378,13 +1444,6 @@
                 font-size: 0.85rem;
                 padding: 12px 18px;
             }
-            .back-to-top {
-                width: 38px;
-                height: 38px;
-                font-size: 1rem;
-                bottom: 15px;
-                right: 15px;
-            }
         }
     </style>
 </head>
@@ -1420,9 +1479,8 @@
             <button class="load-btn" id="lolbutton">
                 <i class="fas fa-sync-alt"></i> Load Games
             </button>
-            <!-- NEW: Random Game Button -->
-            <button class="load-btn" id="randomBtn">
-                <i class="fas fa-dice"></i> Random Game
+            <button class="load-btn random-btn" id="randomBtn" type="button" title="Jump to a random game (press R)">
+                <i class="fas fa-dice"></i> Surprise Me
             </button>
         </div>
         <div class="filter-chips" id="filterChips">
@@ -1439,11 +1497,6 @@
             Arctic 1.0 · Built for UGS · All games property of their respective owners
         </div>
     </div>
-
-    <!-- ====== BACK TO TOP BUTTON ====== -->
-    <button id="backToTop" class="back-to-top" aria-label="Back to top">
-        <i class="fas fa-arrow-up"></i>
-    </button>
 
     <!-- ====== SETTINGS MODAL ====== -->
     <div class="settings-overlay" id="settingsOverlay">
@@ -1472,6 +1525,11 @@
                     <div class="theme-option" data-theme="midnight" id="themeMidnight">
                         <div class="theme-preview midnight"></div>
                         <span class="theme-name">Midnight Aurora</span>
+                        <span class="theme-check"><i class="fas fa-check-circle"></i></span>
+                    </div>
+                    <div class="theme-option" data-theme="sunset" id="themeSunset">
+                        <div class="theme-preview sunset"></div>
+                        <span class="theme-name">Sunset Blaze</span>
                         <span class="theme-check"><i class="fas fa-check-circle"></i></span>
                     </div>
                 </div>
@@ -1656,12 +1714,14 @@
             const THEME_LABELS = {
                 arctic: 'Arctic Frost',
                 strawberry: 'Strawberry Blast',
-                midnight: 'Midnight Aurora'
+                midnight: 'Midnight Aurora',
+                sunset: 'Sunset Blaze'
             };
             const THEME_ICONS = {
                 arctic: 'fas fa-snowflake',
                 strawberry: 'fas fa-heart',
-                midnight: 'fas fa-moon'
+                midnight: 'fas fa-moon',
+                sunset: 'fas fa-fire'
             };
 
             function getDefaultSettings() {
@@ -1699,14 +1759,14 @@
             function getSavedTheme() {
                 try {
                     const t = localStorage.getItem(THEME_KEY);
-                    if (t === 'strawberry' || t === 'midnight' || t === 'arctic') return t;
+                    if (t === 'strawberry' || t === 'midnight' || t === 'arctic' || t === 'sunset') return t;
                 } catch (_) { /* ignore */ }
                 return 'arctic';
             }
 
             function setTheme(themeName) {
                 if (!THEME_LABELS[themeName]) themeName = 'arctic';
-                document.body.classList.remove('theme-arctic', 'theme-strawberry', 'theme-midnight');
+                document.body.classList.remove('theme-arctic', 'theme-strawberry', 'theme-midnight', 'theme-sunset');
                 document.body.classList.add('theme-' + themeName);
                 document.querySelectorAll('.theme-option').forEach(el => {
                     el.classList.toggle('active', el.dataset.theme === themeName);
@@ -1834,6 +1894,22 @@
                 data.games[name].lastPlayed = new Date().toISOString();
                 data.totalPlays += 1;
                 saveProgress(data);
+                checkMilestone(data.totalPlays);
+            }
+
+            const PLAY_MILESTONES = {
+                5: '🎮 5 plays in — you\'re just getting warmed up!',
+                10: '🔥 10 plays! You\'re on a roll.',
+                25: '⭐ 25 plays! Certified regular.',
+                50: '🏆 50 plays! Arctic veteran status unlocked.',
+                100: '💎 100 plays! Absolute legend.',
+                250: '👑 250 plays! Are you even human?',
+                500: '🚀 500 plays! Hall of fame material.'
+            };
+
+            function checkMilestone(totalPlays) {
+                const message = PLAY_MILESTONES[totalPlays];
+                if (message) showToast(message, 'success');
             }
 
             function toggleFavorite(gameName) {
@@ -1863,6 +1939,34 @@
                 return document.querySelectorAll(
                     '#sections-container .buttons-container input[type="button"], .game-btn'
                 );
+            }
+
+            function getVisibleGameButtons() {
+                return Array.from(getAllGameButtons()).filter(btn => {
+                    if (btn.classList.contains('library-hidden')) return false;
+                    const section = btn.closest('.letter-section');
+                    if (section && section.style.display === 'none') return false;
+                    if (btn.offsetParent === null) return false;
+                    return true;
+                });
+            }
+
+            function playRandomGame() {
+                const pool = getVisibleGameButtons();
+                if (!pool.length) {
+                    showToast('No games to pick from right now', 'error');
+                    return;
+                }
+                const pick = pool[Math.floor(Math.random() * pool.length)];
+                const name = getGameNameFromButton(pick);
+                pick.scrollIntoView({
+                    behavior: appSettings.reduceMotion ? 'auto' : 'smooth',
+                    block: 'center'
+                });
+                pick.classList.add('surprise-pick');
+                setTimeout(() => pick.classList.remove('surprise-pick'), 1600);
+                showToast('🎲 Picked: ' + name, 'info');
+                setTimeout(() => { pick.click(); }, appSettings.reduceMotion ? 0 : 550);
             }
 
             function getRecentNames(limit) {
@@ -2175,6 +2279,13 @@
                         if (search) search.focus();
                     }
                 }
+                if ((e.key === 'r' || e.key === 'R') && !overlay.classList.contains('active')) {
+                    const tag = (e.target && e.target.tagName) || '';
+                    if (tag !== 'INPUT' && tag !== 'TEXTAREA') {
+                        e.preventDefault();
+                        playRandomGame();
+                    }
+                }
             });
 
             // ============================================================
@@ -2293,7 +2404,6 @@
 
             let layoutLock = false;
             let gameObserver = null;
-
             function refreshGameChrome() {
                 if (layoutLock) return;
                 layoutLock = true;
@@ -2332,6 +2442,11 @@
                     updateStatsUI();
                 }, 600);
             });
+
+            const randomBtnEl = document.getElementById('randomBtn');
+            if (randomBtnEl) {
+                randomBtnEl.addEventListener('click', playRandomGame);
+            }
 
             // ============================================================
             //  11. SIDEBAR
@@ -2457,61 +2572,10 @@
                 });
             }
 
-            // ============================================================
-            //  14. NEW: RANDOM GAME BUTTON
-            // ============================================================
-            document.getElementById('randomBtn').addEventListener('click', function() {
-                const allBtns = document.querySelectorAll('#sections-container .buttons-container input[type="button"]:not(.library-hidden)');
-                if (allBtns.length === 0) {
-                    showToast('No games available to pick!', 'error');
-                    return;
-                }
-                const random = allBtns[Math.floor(Math.random() * allBtns.length)];
-                random.scrollIntoView({ behavior: 'smooth', block: 'center' });
-                random.style.transition = 'all 0.3s';
-                random.style.boxShadow = '0 0 40px var(--accent-glow)';
-                random.style.transform = 'scale(1.05)';
-                setTimeout(() => {
-                    random.style.transform = '';
-                    random.style.boxShadow = '';
-                }, 1500);
-                showToast(`🎲 Random pick: ${getGameNameFromButton(random)}`, 'info');
-            });
-
-            // ============================================================
-            //  15. NEW: BACK TO TOP BUTTON
-            // ============================================================
-            const backToTop = document.getElementById('backToTop');
-            window.addEventListener('scroll', function() {
-                if (window.scrollY > 400) {
-                    backToTop.style.display = 'flex';
-                } else {
-                    backToTop.style.display = 'none';
-                }
-            });
-            backToTop.addEventListener('click', function() {
-                window.scrollTo({ top: 0, behavior: 'smooth' });
-            });
-
-            // ============================================================
-            //  16. SERVICE WORKER REGISTRATION (offline support)
-            // ============================================================
-            if ('serviceWorker' in navigator) {
-                window.addEventListener('load', function() {
-                    navigator.serviceWorker.register('sw.js')
-                        .then(function(reg) {
-                            console.log('Service Worker registered successfully.');
-                        })
-                        .catch(function(err) {
-                            console.log('Service Worker registration failed: ', err);
-                        });
-                });
-            }
-
-            // Final initialization
             applySettings();
             updateStatsUI();
-            console.log('Arctic 1.0 Games — Theme, settings, progress tracking, offline-ready.');
+
+            console.log('Arctic 1.0 Games — Theme, settings & progress tracking enabled.');
 
         })();
     </script>
